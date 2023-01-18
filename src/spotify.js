@@ -9,7 +9,7 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const redirectUrl = 'http://localhost:3000';
 
 export const GetTokenFromResponse = () => {
-  console.log(window.location.hash);
+  
   return window.location.hash
 
     .substring(1)

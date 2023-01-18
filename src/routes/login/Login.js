@@ -1,15 +1,25 @@
 import React from 'react'
-/* import { NavLink, Outlet } from 'react-router-dom'; */
+
 import logo from '../../media/headphones-gradient.png'
 import { loginUrl } from '../../spotify';
 import classes from './Login.module.css'
+import MainContext from '../../context/MainContext';
+import { useContext } from 'react';
+
 function Login() {
+  const [STATE, DISPATCH] = useContext(MainContext)
+  const {login, user} = STATE
+
+
   return (
-    <div className={classes.main}>
-        <img src= {logo} alt='soundwise logo'/>
-        <a href={loginUrl}>LOGIN TO SPOTIFY</a>
-        
-        </div>
+    <div>
+    {login ?   <div className={classes.main}>
+      <img src= {logo} alt='soundwise logo'/>
+      <a href={loginUrl}>LOGIN TO SPOTIFY</a>
+      
+      </div> : <div></div> }
+      </div>
+   
   )
 }
 

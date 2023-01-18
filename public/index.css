@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Tourney:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap'); /* ===> This is for the description  */
-/* font-family: 'Kanit', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap');
+ /* ===> This is for the description  font-family: 'Roboto Condensed', sans-serif; */
+/* 
 
  */
 @import url('https://fonts.googleapis.com/css2?family=Volkhov:wght@400;700&display=swap');
@@ -17,5 +18,7 @@
   --color-green: #00af91;
   --color-orange: #f58634;
   --color-backGround: #180a0a;
+  --color-backGround-hover: #352626;
+  --color-album-backGround: #220e0e;
   --color-gold: #ffcc29;
 }

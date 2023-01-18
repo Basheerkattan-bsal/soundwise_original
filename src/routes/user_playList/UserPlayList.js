@@ -1,15 +1,17 @@
 import React, { useContext, useEffect } from 'react';
-import { spotify } from '../spotify';
-import { GetTokenFromResponse } from '../spotify';
-import MainContext from '../context/MainContext';
-export default function UserHome() {
-  const [STATE, DISPATCH] = useContext(MainContext);
+import { spotify } from '../../spotify';
+import { GetTokenFromResponse } from '../../spotify';
+import MainContext from '../../context/MainContext';
 
+export default function UserPlayList() {
+  const [STATE, DISPATCH] = useContext(MainContext);
+ const {user} = STATE
+ 
   useEffect(() => {
     async function getData() {
       const hash = GetTokenFromResponse();
       window.location.hash = '';
-      console.log(hash);
+      
       let _token = hash.access_token;
 
       if (_token) {
@@ -45,5 +47,5 @@ export default function UserHome() {
     getData();
   }, []);
 
-  return <div>Play List</div>;
+  return <div>Play List...</div>;
 }

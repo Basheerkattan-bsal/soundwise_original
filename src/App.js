@@ -5,7 +5,7 @@ import { GetTokenFromResponse } from './spotify';
 import MainContext from './context/MainContext.js';
 import Nav from './components/nav/Nav';
 import Home from './routes/home/Home';
-import UserHome from './user_playList/UserPlayList';
+import UserHome from './routes/user_playList/UserPlayList';
 import Search from './routes/search/Search';
 import Library from './routes/library/Library';
 import Playlist from './routes/playlist/Playlist';
@@ -14,7 +14,8 @@ import Songs from './routes/songs/Songs';
 import classes from './App.module.css';
 
 function App() {
-  const [{token} , DISPATCH] = useContext(MainContext);
+  const [{ token, user }, DISPATCH] = useContext(MainContext);
+
 
   useEffect(() => {
     async function getData() {
@@ -51,8 +52,7 @@ function App() {
         });
 
         spotify.getPlaylistTracks(playListId).then(response => {
-          console.log(playListId);
-          console.log(response);
+          
           DISPATCH({
             type: 'SET_PLAYLIST_TRACKS',
             playlistTracks: response,
@@ -75,7 +75,7 @@ function App() {
         {/* <Route path="login" element={<Login />} /> */}
       </Routes>
       <Login />
-      <UserHome/>
+      {user ? <UserHome /> : <div></div>}
     </div>
   );
 }
