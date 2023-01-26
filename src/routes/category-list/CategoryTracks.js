@@ -152,8 +152,14 @@ export default function CategoryTracks(props) {
                         }
                       </div>
                       <div className={classes.trackInfo}>
-                        <div>{track.track.name}</div>
-                        <div> {track.track.artists[0].name} </div>
+                        <NavLink>{track.track.name}</NavLink>
+                        <div> {track.track.artists.map((artist, index) => {
+                          return(
+                            <NavLink key= {index} to='/artist'>
+                              {artist.name}
+                            </NavLink>
+                          )
+                        })} </div>
                       </div>
                     </div>
                     <div className={classes['album-info']}>
