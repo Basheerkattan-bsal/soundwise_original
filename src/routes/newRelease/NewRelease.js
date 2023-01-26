@@ -5,7 +5,7 @@ import MainContext from "../../context/MainContext";
 export default function NewRelease(props) {
   const [STATE, DISPATCH] = useContext(MainContext);
   const { newRelease, token } = STATE;
-
+console.log(newRelease);
   useEffect(() => {
     async function getNewRelease() {
       await fetch("https://api.spotify.com/v1/browse/new-releases?&limit=12", {
@@ -36,7 +36,7 @@ export default function NewRelease(props) {
             return (
               <div key={index} className={classes.albumBox}>
                 <div className={classes.albumImage}>
-                  <img src={album.images[1].url} alt="artist image" />
+                  <img src={album.images[1].url} alt="/artist_image" />
                 </div>
                 <div className={classes.albumName}>{album.name}</div>
                 <div className={classes.artistName}>

@@ -12,15 +12,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 /* import logo1 from '../media/soundwise2.png' */
 import classes from "../../components/nav/Nav.module.css";
+import MainContext from "../../context/MainContext.js";
+import { useContext } from "react";
 
 export default function Nav() {
+  const [STATE, DISPATCH] = useContext(MainContext);
+
   const [state, setState] = useState({ width: "15vw", height: "200" });
   return (
     <Resizable
       style={{ border: "1px solid black" }}
       minHeight="100vh"
       /* set minWidth to be wider */
-      minWidth="15vw"
+      minWidth="13vw"
       maxWidth="25vw"
       size={{ width: state.width, height: state.height }}
       onResizeStop={(e, direction, ref, d) => {
@@ -53,6 +57,13 @@ export default function Nav() {
               className={({ isActive }) =>
                 isActive ? `${classes.active}` : `${classes.link}`
               }
+              //changing the status of categories to false to get back to main category page
+              onClick={() => {
+                DISPATCH({
+                  type: "SET_CAT_PLAYLIST",
+                  catPlaylist: false,
+                });
+              }}
               to="search"
             >
               <FontAwesomeIcon

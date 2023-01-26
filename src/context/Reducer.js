@@ -1,6 +1,6 @@
 export const initialState = {
   token: "",
-  playLists: null,
+  
   featuredPlaylists: null,
   playListTracks: [],
   newRelease: null,
@@ -8,6 +8,8 @@ export const initialState = {
   search: null,
   user: null,
   login: false,
+  catPlaylist: false,
+  profile: null,
 };
 
 export const mainReducer = (state, action) => {
@@ -25,12 +27,7 @@ export const mainReducer = (state, action) => {
         user: action.user,
       };
     }
-    case "SET_PLAYLISTS": {
-      return {
-        ...state,
-        playLists: action.playLists,
-      };
-    }
+   
     case "SET_PLAYLIST_TRACKS": {
       return {
         ...state,
@@ -62,6 +59,19 @@ export const mainReducer = (state, action) => {
         ...state,
         search: action.search,
       };
+    }
+
+    case "SET_CAT_PLAYLIST": {
+      return {
+        ...state,
+        catPlaylist: action.catPlaylist,
+      };
+    }
+    case 'SET_PROFILE':{
+      return{
+        ...state,
+        profile: action.profile
+      }
     }
 
     default: {

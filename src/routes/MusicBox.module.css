@@ -19,6 +19,8 @@
     flex-wrap: wrap;
     gap: 1rem;
 }
+
+
 .albumBox{
     background-color: var(--color-album-backGround);
     border-radius: 5px;
@@ -28,7 +30,9 @@
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 1rem;
     width: 11.5rem;
-    transition: all .3s
+    transition: all .3s;
+      text-decoration: none; 
+    
    
 }
 

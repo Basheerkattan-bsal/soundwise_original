@@ -11,6 +11,8 @@ import Library from './routes/library/Library';
 import Playlist from './routes/playlist/Playlist';
 import Login from './routes/login/Login';
 import Songs from './routes/songs/Songs';
+import CategoryTracks from './routes/category-list/CategoryTracks';
+import Profile from './routes/profile/Profile';
 import classes from './App.module.css';
 
 function App() {
@@ -72,6 +74,8 @@ function App() {
         <Route path="library" element={<Library />} />
         <Route path="playlist" element={<Playlist />} />
         <Route path="songs" element={<Songs />} />
+        <Route path='activePlaylist' element={<CategoryTracks/>}/>
+        <Route path='profile' element={<Profile/>}/>
         {/* <Route path="login" element={<Login />} /> */}
       </Routes>
       <Login />
