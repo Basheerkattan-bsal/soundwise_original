@@ -23,7 +23,8 @@ const getReleaseDate = date => {
   });
   const fullDate =
     alphaMonth + " " + date.substring(8, 10) + ", " + date.substring(0, 4);
-  return(fullDate)
+
+  return fullDate
 };
 
 export default getReleaseDate

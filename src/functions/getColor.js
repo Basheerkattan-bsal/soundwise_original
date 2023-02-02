@@ -1,13 +1,13 @@
 import { prominent } from 'color.js';
 
-const fetchColor = (image) => {
+const fetchColor = async(image) => {
 
-  prominent(image, {
+  const color = await prominent(image, {
     format: 'hex',
     amount: 5,
-  }).then(color => {
-    return(color);
-  });
+  })
+
+  return color
 };
 
 export default fetchColor
