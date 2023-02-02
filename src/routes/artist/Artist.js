@@ -1,22 +1,18 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { prominent } from "color.js";
 
-import { useToken } from '../../spotify.js';
-import classes from '../../routes/category-list/CategoryTracks.module.css';
-import { NavLink, Outlet } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock } from '@fortawesome/free-regular-svg-icons';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { prominent } from 'color.js';
-import PopularAlbums from '../artist/PopularAlbums.js';
-import RelatedArtists from '../artist/RelatedArtists.js';
-import style from './Artist.module.css';
-import Bouncer from '../../functions/bouncer.js';
+import { useToken } from "../../spotify.js";
+import PopularAlbums from "../artist/PopularAlbums.js";
+import RelatedArtists from "../artist/RelatedArtists.js";
+import classes from "./Artist.module.css";
+import Bouncer from "../../functions/bouncer.js";
 
 export default function Artist() {
   const navigate = useNavigate();
   const { state } = useLocation();
-
   const [colors, setColors] = useState(null);
+
   const [isActive, setIsActive] = useState(-1);
   const [artistInfo, setArtistInfo] = useState(null);
   const [popularTrack, setPopularTrack] = useState(null);
@@ -26,8 +22,8 @@ export default function Artist() {
   const searchParams = useToken();
 
   let trackArr = [];
-  const { artist } = state;
-  console.log('This is coming from artist',artist);
+  const {artist} = state
+  console.log(artist)
   const artistName = artist.name;
 
   //get the artist Id to fetch artist api
@@ -41,11 +37,11 @@ export default function Artist() {
     ).then(res =>
       res.json().then(res => {
         if (res.error) {
-          navigate('/');
+          navigate("/");
         } else {
           setArtistInfo(res);
           prominent(res.images[0].url, {
-            format: 'hex',
+            format: "hex",
             amount: 5,
           }).then(color => {
             setColors(color);
@@ -62,7 +58,7 @@ export default function Artist() {
       .then(res => res.json())
       .then(res => {
         if (res.error) {
-          navigate('/');
+          navigate("/");
         } else {
           setPopularTrack(res);
         }
@@ -87,11 +83,11 @@ export default function Artist() {
     d = Math.floor(h / 24);
     h = h % 24;
     h += d * 24;
-    const duration = h + ' h ' + m + ' min';
+    const duration = h + " h " + m + " min";
     if (s < 10) {
-      s = '0' + s;
+      s = "0" + s;
     }
-    const trackTime = m + ':' + s;
+    const trackTime = m + ":" + s;
     return [duration, trackTime];
   }
 
@@ -112,18 +108,17 @@ export default function Artist() {
       }
     };
     const timeoutId = setTimeout(() => {
-      document.addEventListener('click', handleOutsideClick, false);
+      document.addEventListener("click", handleOutsideClick, false);
     }, 0);
     return () => {
       clearTimeout(timeoutId);
-      document.removeEventListener('click', handleOutsideClick, false);
+      document.removeEventListener("click", handleOutsideClick, false);
     };
   }, [isActive]);
 
   return (
-    <div className={classes.main} translate="no">
+    <div className={classes.main}>
       <Bouncer dependencies={[artist]} />
-
       {state && colors && artistInfo && (
         <div>
           <div className={classes.headerNav}>The ARTIST page</div>
@@ -134,7 +129,7 @@ export default function Artist() {
             }}
           >
             <img
-              className={classes['album_cover']}
+              className={classes["album_cover"]}
               src={artistInfo?.images[1].url}
               alt="track_image"
             />
@@ -146,32 +141,31 @@ export default function Artist() {
                   <img
                     src={artistInfo?.images[2].url}
                     alt="artist_image"
-                    className={classes['artist_image']}
+                    className={classes["artist_image"]}
                   />
                   <span></span>
                   <p>
-                    {artistInfo?.followers.total.toLocaleString()} followers{' '}
+                    {artistInfo?.followers.total.toLocaleString()} followers{" "}
                   </p>
                   <span></span>
                 </div>
               </div>
             </div>
           </div>
-
           <div></div>
-          <div className={classes['artist_info']}>
+          <div className={classes["artist_info"]}>
             <img
               src={artistInfo.images[1].url}
               alt="artist_image"
-              className={classes['artist_profile_image']}
+              className={classes["artist_profile_image"]}
             />
             <div>
-              <h5 style={{ padding: '0.5rem 0' }}>ARTIST</h5>
+              <h5 style={{ padding: "0.5rem 0" }}>ARTIST</h5>
               <h4> {artistName}</h4>
             </div>
           </div>
           <div>
-            <div className={classes['popular_track']}>
+            <div className={classes["popular_track"]}>
               <p>Popular Tracks by</p>
               <h3>{artistName}</h3>
             </div>
@@ -185,13 +179,13 @@ export default function Artist() {
                         e.stopPropagation();
                         setIsActive(index);
                       }}
-                      className={`${isActive === index ? classes.active : ''} ${
-                        classes['playlist-container']
+                      className={`${isActive === index ? classes.active : ""} ${
+                        classes["playlist-container"]
                       } `}
                     >
                       <div className={classes.playlistInfo} key={index}>
                         <div className={classes.trackImg}>
-                          <div className={classes['track_index']}>
+                          <div className={classes["track_index"]}>
                             {index + 1}
                           </div>
                           {
@@ -202,13 +196,13 @@ export default function Artist() {
                           }
                         </div>
                       </div>
-                      <div className={classes['album-info']}>
+                      <div className={classes["album-info"]}>
                         <div>{track.name}</div>
                       </div>
-                      <div className={classes['album-date']}>
+                      <div className={classes["album-date"]}>
                         {track.album.release_date}
-                      </div>{' '}
-                      <div className={classes['track-duration']}>
+                      </div>{" "}
+                      <div className={classes["track-duration"]}>
                         {msToTime(track.duration_ms)[1]}
                       </div>
                     </div>
@@ -218,9 +212,9 @@ export default function Artist() {
             {popularTrack?.tracks.length > 5 && (
               <button
                 onClick={() => setShowMore(!showMore)}
-                className={classes['show_btn']}
+                className={classes["show_btn"]}
               >
-                {showMore ? 'SHOW LESS' : 'SEE MORE'}
+                {showMore ? "SHOW LESS" : "SEE MORE"}
               </button>
             )}
           </div>

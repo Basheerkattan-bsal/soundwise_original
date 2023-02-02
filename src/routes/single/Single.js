@@ -4,7 +4,8 @@ import Lyrics from './Lyrics.js';
 import { useToken } from '../../spotify.js';
 import PopularAlbums from '../artist/PopularAlbums.js';
 import RelatedArtists from '../artist/RelatedArtists.js';
-import classes from './Single.module.css';
+import style from './Single.module.css';
+import classes from '../category-list/CategoryTracks.module.css'
 
 import { prominent } from 'color.js';
 import Bouncer from '../../functions/bouncer.js';
@@ -24,10 +25,12 @@ export default function Single() {
 
   let trackArr = [];
   console.log('Coming from single.js',singleTrack)
-  const artistName = singleTrack?.track.artists[0].name;
-  const songName = singleTrack?.track.name;
+  const realTrack = singleTrack.track ? singleTrack.track : singleTrack
+  const artistName = realTrack?.artists[0]?.name;
+  const songName = realTrack?.name;
   //get the artist Id to fetch artist api
-  const artistId = singleTrack.track.artists[0].id;
+  const artistId = realTrack?.artists[0]?.id;
+  console.log(realTrack)
 
   //get artist info
   const getArtistInfo = async () => {
@@ -88,7 +91,7 @@ export default function Single() {
   //store the colors from album cover
 
   const fetchColor = async () => {
-    prominent(singleTrack?.track?.album?.images[1]?.url, {
+    prominent(album?.images[1]?.url, {
       format: 'hex',
       amount: 5,
     }).then(color => {
@@ -127,7 +130,7 @@ export default function Single() {
     <div className={classes.main}>
       {singleTrack && colors && artistInfo && (
         <div>
-          <Bouncer dependencies={[singleTrack]} />
+          <Bouncer dependencies={['single', singleTrack]} />
           <div translate="no" className={classes.headerNav}>
             The SINGLE page
           </div>
@@ -140,12 +143,12 @@ export default function Single() {
           >
             <img
               className={classes['album_cover']}
-              src={singleTrack?.track?.album.images[1].url}
+              src={album?.images[1]?.url}
               alt="track_image"
             />
             <div>
               <h4>SONG</h4>
-              <h2>{singleTrack?.track.album.name}</h2>
+              <h2>{album?.name}</h2>
               <div className={classes.headerInfo}>
                 <div>
                   <img
@@ -153,42 +156,52 @@ export default function Single() {
                     alt="artist_image"
                     className={classes['artist_image']}
                   />
-                  <NavLink className={classes.profileLink} to="/profile">
-                    {artistName}
-                  </NavLink>
+                  {
+                    album.artists.map((artist, index) => {
+                      return (
+                        <React.Fragment key={index}>
+                          {index ? '- ' : ''}
+                          <NavLink
+                            className={classes.profileLink}
+                            to="/artist"
+                            key={index}
+                            state={{ artist }}
+                          >
+                            {artist.name}
+                          </NavLink>
+                        </React.Fragment>
+                      );
+                    })
+                  }
                   <span></span>
-                  <p>{singleTrack?.added_at.substring(0, 4)} </p>
+                  <p>{realTrack?.added_at ? realTrack.added_at.substring(0, 4) : album.release_date.slice(0, 4)} </p>
                   <span></span>
-                  <p>{msToTime(singleTrack.track.duration_ms)[1]}</p>
+                  <p>{msToTime(realTrack?.duration_ms)[2]}</p>
                 </div>
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-          <div className={classes['song-container']}>
+
+          <div className={style['song-container']}>
          
-              <Lyrics  colors={colors} songName={songName} />
+          <Lyrics  colors={colors} songName={songName} />
             
 
-            <div translate="no" className={classes['artist_info']}>
+            <div translate="no" className={style['artist_info']}>
               <img
                 src={artistInfo.images[1].url}
                 alt="artist_image"
-                className={classes['artist_profile_image']}
+                className={style['artist_profile_image']}
               />
               <div>
                 <h5 style={{ padding: '0.5rem 0' }}>ARTIST</h5>
                 <h4> {artistName}</h4>
               </div>
-=======
-          <div>
-            <div className={classes["single_lyrics"]}>
-              {parse(lyrics)}
->>>>>>> 30ecd59 ( what)
-            </div>
+
+         
           </div>
           <div translate="no">
-            <div className={classes['popular_track']}>
+            <div className={style['popular_track']}>
               <p>Popular Tracks by</p>
               <h3>{artistName}</h3>
             </div>
@@ -235,7 +248,7 @@ export default function Single() {
             {popularTrack?.tracks.length > 5 && (
               <button
                 onClick={() => setShowMore(!showMore)}
-                className={classes['show_btn']}
+                className={style['show_btn']}
               >
                 {showMore ? 'SHOW LESS' : 'SEE MORE'}
               </button>
@@ -251,7 +264,9 @@ export default function Single() {
             <RelatedArtists artistId={artistId} />
           </div>
         </div>
+        </div>
       )}
     </div>
+
   );
 }

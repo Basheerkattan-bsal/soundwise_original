@@ -4,7 +4,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import classes from './Single.module.css';
 import parse from 'html-react-parser';
-import Bouncer from '../../functions/bouncer';
 
 export default function Lyrics({ songName,  singleTrack }) {
   const [lyrics, setLyrics] = useState('');
@@ -71,7 +70,6 @@ export default function Lyrics({ songName,  singleTrack }) {
   return (
 
     <div className={classes['song-main']}>
-        <Bouncer dependencies={[singleTrack]} />
       
         <div className={classes['single_lyrics']}>
             <h3>Lyrics</h3>
@@ -79,7 +77,7 @@ export default function Lyrics({ songName,  singleTrack }) {
             id="google_translate_element"
             
           ></div>
-          <p>{parse(lyrics)} </p>
+          {parse(lyrics)}
         </div>
         <Toaster position="top-center" />
       

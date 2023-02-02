@@ -25,9 +25,77 @@ export default function ActiveAlbum() {
       const newAlbum = await getDetails(album.type, album.id, searchParams)
       const newArtist = await getDetails(album.artists[0].type, album.artists[0].id, searchParams)
 
-      console.log('artis', newArtist)
-      setAlbumInfo(newAlbum)
-      setArtistInfo(newArtist)
+  const getReleaseDate = date => {
+    // const date = releaseDate;
+    const monthArr = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const getMonth = Math.floor(+date.substring(5, 7));
+    let alphaMonth = "";
+    monthArr.forEach((val, index) => {
+      if (index === getMonth) {
+        alphaMonth = val;
+      }
+    });
+    const fullDate =
+      alphaMonth + " " + date.substring(8, 10) + ", " + date.substring(0, 4);
+    setReleaseTime(fullDate);
+  };
+
+  const getCatTracks = async () => {
+    await fetch(`https://api.spotify.com/v1/albums/${trackId}`, searchParams)
+      .then(res => res.json())
+      .then(res => {
+        setAlbumTracks(res.tracks)
+        getReleaseDate(res.release_date);
+
+        let timeCounter = 0;
+        if (res.album_type === "album") {
+          res.tracks?.items.map(track => {
+            timeCounter += track.duration_ms;
+          });
+          const durationTime = msToTime(timeCounter);
+          setDuration(durationTime[0]);
+        } else {
+          const activeTime = msToTime(res.tracks.items[0].duration_ms);
+          setDuration(activeTime[2]);
+        }
+
+
+      });
+  };
+
+  const getArtistInfo = async () => {
+    await fetch(
+      `https://api.spotify.com/v1/artists/${artistId}`,
+      searchParams
+    ).then(res =>
+      res.json().then(res => {
+        if (res.error) {
+          navigate("/");
+        } else {
+          setArtistInfo(res);
+        }
+      })
+    );
+  };
+
+  useEffect(() => {
+    fetchColor();
+    if (trackId) {
+      getCatTracks();
+      getArtistInfo()
     }
   }, [album])
 
@@ -35,7 +103,7 @@ export default function ActiveAlbum() {
     <div className={classes.main}>
       {albumInfo && artistInfo && (
         <div>
-          <Bouncer dependencies={[album]} />
+          <Bouncer dependencies={['album', album]} />
           <div className={classes.headerNav}>The top nav</div>
 
           <Header target={albumInfo} artistInfo={artistInfo} />

@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useToken } from '../../spotify.js';
-import DisplayContext from '../../context/DisplayContext.js';
 import style from '../MusicBox.module.css';
 import classes from './CategoryTracks.module.css';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
@@ -21,7 +20,6 @@ export default function CategoryTracks() {
   const trackId = activePlaylist?.id;
   const trackName = activePlaylist?.name;
   const [playlistTracks, setPlaylistTracks] = useState(false)  
-  console.log('coming from category tracks',playlistTracks);
   //search params for fetching data
   const searchParams = useToken();
 
@@ -82,7 +80,7 @@ export default function CategoryTracks() {
     <div className={classes.main} translate="no">
       {colors && activePlaylist && (
         <div>
-          <Bouncer dependencies={[activePlaylist]} />
+          <Bouncer dependencies={['catTrcks', activePlaylist]} />
           <div className={classes.headerNav}>The top nav</div>
           <div
             className={classes.header}
@@ -126,7 +124,6 @@ export default function CategoryTracks() {
                 </div>
               </div>
               {playlistTracks?.tracks?.items?.map((track, index) => {
-               console.log('Tracks in map', track);
                 return (
                   <div
                     key={index}
