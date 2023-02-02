@@ -164,6 +164,7 @@ export default function Single() {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
           <div className={classes['song-container']}>
          
               <Lyrics  colors={colors} songName={songName} />
@@ -179,6 +180,11 @@ export default function Single() {
                 <h5 style={{ padding: '0.5rem 0' }}>ARTIST</h5>
                 <h4> {artistName}</h4>
               </div>
+=======
+          <div>
+            <div className={classes["single_lyrics"]}>
+              {parse(lyrics)}
+>>>>>>> 30ecd59 ( what)
             </div>
           </div>
           <div translate="no">

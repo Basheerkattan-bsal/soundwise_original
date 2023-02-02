@@ -1,4 +1,3 @@
-
 import { useContext } from "react";
 import MainContext from "./context/MainContext.js";
 import SpotifyWebApi from "spotify-web-api-js";
