@@ -1,5 +1,5 @@
 export const initialState = {
-  context: false,
+  context: null,
 };
 
 export const playerReducer = (state, action) => {

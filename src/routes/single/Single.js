@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import Lyrics from "./Lyrics.js";
 import Header from "../components/header/Header.js";
@@ -14,8 +14,8 @@ import { useToken } from "../../spotify.js";
 import style from "./Single.module.css";
 import classes from "../category-list/CategoryTracks.module.css";
 
-import { prominent } from "color.js";
 import Bouncer from "../../functions/bouncer.js";
+
 export default function Single() {
   const { state } = useLocation();
   const track = state.track;
@@ -39,28 +39,35 @@ export default function Single() {
       : popularTrack?.tracks.slice(0, 5);
   }
 
-  useEffect(async () => {
-    const routes = document.getElementById("routes");
-    routes.scrollTo({ top: 0, behavior: "smooth" });
-    if (artist.id) {
-      const newTrack = await getDetails(
-        realTrack.type,
-        realTrack.id,
-        searchParams
-      );
-      setTrackInfo(newTrack);
-      const newColors = await fetchColor(newTrack.album.images[0].url);
-      setColors(newColors);
-      const newArtist = await getDetails(artist.type, artist.id, searchParams);
-      setArtistInfo(newArtist);
-      const popularTracks = await getDetails(
-        artist.type,
-        artist.id,
-        searchParams,
-        "/top-tracks?country=DE&limit=10"
-      );
-      setPopularTrack(popularTracks);
-    }
+  useEffect(() => {
+    const data = async () => {
+      const routes = document.getElementById("routes");
+      routes.scrollTo({ top: 0, behavior: "smooth" });
+      if (artist.id) {
+        const newTrack = await getDetails(
+          realTrack.type,
+          realTrack.id,
+          searchParams
+        );
+        setTrackInfo(newTrack);
+        const newColors = await fetchColor(newTrack.album.images[0].url);
+        setColors(newColors);
+        const newArtist = await getDetails(
+          artist.type,
+          artist.id,
+          searchParams
+        );
+        setArtistInfo(newArtist);
+        const popularTracks = await getDetails(
+          artist.type,
+          artist.id,
+          searchParams,
+          "/top-tracks?country=DE&limit=10"
+        );
+        setPopularTrack(popularTracks);
+      }
+    };
+    data();
   }, [state]);
 
   return (

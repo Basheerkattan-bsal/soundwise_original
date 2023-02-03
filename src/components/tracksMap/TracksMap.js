@@ -1,19 +1,21 @@
-import React, { useState, useEffect, useRef} from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState, useEffect, useRef } from "react";
+import { NavLink } from "react-router-dom";
 
-import msToTime from '../../functions/timer.js'
+import msToTime from "../../functions/timer.js";
 
-import classes from '../../routes/category-list/CategoryTracks.module.css'
-import { faClock } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ArtistsMap from '../../routes/components/artistsMap/ArtistsMap.js';
+import classes from "../../routes/category-list/CategoryTracks.module.css";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ArtistsMap from "../../routes/components/artistsMap/ArtistsMap.js";
 
-const TracksMap = ({target, picture, artists, album, release, info}) => {
+import PlayerContext from "../../context/PlayerContext.js";
+import { useContext } from "react";
+const TracksMap = ({ target, picture, artists, album, release, info }) => {
+  const [player, playerDispatch] = useContext(PlayerContext);
 
   const [isActive, setIsActive] = useState(-1);
-  console.log(target)
 
-  const realMap = target.tracks ? target.tracks.items : target
+  const realMap = target.tracks ? target.tracks.items : target;
 
   const ref = useRef(null);
   useEffect(() => {
@@ -23,38 +25,44 @@ const TracksMap = ({target, picture, artists, album, release, info}) => {
       }
     };
     const timeoutId = setTimeout(() => {
-      document.addEventListener('click', handleOutsideClick, false);
+      document.addEventListener("click", handleOutsideClick, false);
     }, 0);
     return () => {
       clearTimeout(timeoutId);
-      document.removeEventListener('click', handleOutsideClick, false);
+      document.removeEventListener("click", handleOutsideClick, false);
     };
   }, [isActive]);
 
   return (
-   <div>
+    <div>
       <div className={classes.mainContainer}>
-        {info ? 
-          <div className={classes['song-info']}>
-            <div className={classes['song-title']}>
+        {info ? (
+          <div className={classes["song-info"]}>
+            <div className={classes["song-title"]}>
               <div>#</div>
               <div>TITLE</div>
             </div>
-            {album ? 
+            {album ? (
               <React.Fragment>
-                <div className={classes['song-album']}>ALBUM</div>
-                {release ? <div className={classes['song-release']}>RELEASE DATE</div> : '' }
+                <div className={classes["song-album"]}>ALBUM</div>
+                {release ? (
+                  <div className={classes["song-release"]}>RELEASE DATE</div>
+                ) : (
+                  ""
+                )}
               </React.Fragment>
-              : ''
-            }
-            <div className={classes['song-time']}>
+            ) : (
+              ""
+            )}
+            <div className={classes["song-time"]}>
               <FontAwesomeIcon icon={faClock} />
             </div>
           </div>
-          : ''
-        }
+        ) : (
+          ""
+        )}
         {realMap?.map((track, index) => {
-          const realTrack = track.track ? track.track : track
+          const realTrack = track.track ? track.track : track;
 
           return (
             <div
@@ -63,58 +71,69 @@ const TracksMap = ({target, picture, artists, album, release, info}) => {
                 e.stopPropagation();
                 setIsActive(index);
               }}
-              className={`${isActive === index ? classes.active : ''} ${classes['playlist-container']
-                } `}
+              onDoubleClick={e => {
+                e.preventDefault();
+                playerDispatch({
+                  type: "SET_CONTEXT",
+                  context: realTrack,
+                });
+              }}
+              className={`${isActive === index ? classes.active : ""} ${
+                classes["playlist-container"]
+              } `}
             >
               <div className={classes.playlistInfo} key={index}>
                 <div className={classes.trackImg}>
                   <div>{index + 1}</div>
-                  {picture ?
+                  {picture ? (
                     <img
                       src={realTrack.album.images[2].url}
                       alt="album_image"
                     />
-                    : ''
-                  }
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className={classes.trackInfo}>
                   <NavLink
-                    className={classes['track-nav']}
+                    className={classes["track-nav"]}
                     to="/single"
-                    state={{ track: realTrack}}
+                    state={{ track: realTrack }}
                   >
                     {realTrack.name}
                   </NavLink>
-                  {artists ? 
-                    <div style={{display: 'flex', gap: '.3rem'}}>
+                  {artists ? (
+                    <div style={{ display: "flex", gap: ".3rem" }}>
                       <ArtistsMap artists={realTrack.artists} />
                     </div>
-                    : ''
-                  }
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
-              {
-                album ?
+              {album ? (
                 <React.Fragment>
-                  <div className={classes['album-info']}>
+                  <div className={classes["album-info"]}>
                     <NavLink
-                      to='/album'
-                      className={classes['album-name']}
-                      state={{album: realTrack.album}}
+                      to="/album"
+                      className={classes["album-name"]}
+                      state={{ album: realTrack.album }}
                     >
                       {realTrack.album.name}
                     </NavLink>
                   </div>
-                  {release ? 
-                    <div className={classes['album-date']}>
+                  {release ? (
+                    <div className={classes["album-date"]}>
                       {realTrack.album.release_date}
                     </div>
-                    : ''
-                  }
+                  ) : (
+                    ""
+                  )}
                 </React.Fragment>
-                : ''
-              }
-              <div className={classes['track-duration']}>
+              ) : (
+                ""
+              )}
+              <div className={classes["track-duration"]}>
                 {msToTime(realTrack.duration_ms)[1]}
               </div>
             </div>
@@ -122,7 +141,7 @@ const TracksMap = ({target, picture, artists, album, release, info}) => {
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TracksMap
+export default TracksMap;

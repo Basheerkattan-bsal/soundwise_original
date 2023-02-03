@@ -5,7 +5,6 @@ const getDetails = async (type, id, searchParams, query) => {
   )
     .then(res => res.json())
     .then(res => {
-      console.log("getDetails", res);
       return res;
     });
 
