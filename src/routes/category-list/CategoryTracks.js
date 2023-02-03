@@ -45,6 +45,7 @@ export default function CategoryTracks() {
             artists={true}
             album={true}
             release={true}
+            info={true}
           />
         </div>
       )}

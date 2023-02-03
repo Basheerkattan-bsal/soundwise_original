@@ -48,6 +48,7 @@ export default function ActiveAlbum() {
             picture={false}
             artists={true}
             album={false}
+            info={true}
           />
 
           <div>

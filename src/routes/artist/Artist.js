@@ -63,6 +63,7 @@ export default function Artist() {
                 picture={true}
                 artists={false}
                 album={true}
+                info={true}
               />
             )}
             {popularTrack?.tracks.length > 5 && (
