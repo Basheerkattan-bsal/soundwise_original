@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import DisplayContext from '../../../context/DisplayContext.js';
+
 import msToTime from '../../../functions/timer.js';
 import style from '../../MusicBox.module.css';
 
 const PlaylistResults = ({ playlists }) => {
   const returnDuration = playlist => {
-   
     return `${playlist.release_date
       .slice(0, 7)
       .split('-')
@@ -14,7 +12,6 @@ const PlaylistResults = ({ playlists }) => {
       .join(' ')} - ${msToTime(playlist.duration_ms)[0]}`;
   };
 
-  
   return (
     <div className={style.main}>
       <div>
@@ -22,7 +19,6 @@ const PlaylistResults = ({ playlists }) => {
           <div>
             <div className={style.albumContainer}>
               {playlists.items?.map((playlist, index) => {
-               
                 return (
                   <NavLink
                     to={
