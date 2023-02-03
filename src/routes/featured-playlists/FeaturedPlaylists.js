@@ -53,12 +53,7 @@ export default function FeaturedPlaylists() {
                 <div key={index} className={classes.albumBox}>
                   <NavLink
                     to="/activePlaylist"
-                    onClick={() => {
-                      dispatch({
-                        type: "SET_ACTIVE_PLAYLIST",
-                        activePlaylist: playlist,
-                      });
-                    }}
+                    state={{playlist: playlist}}
                     key={index}
                     className={style.albumBox}
                   >

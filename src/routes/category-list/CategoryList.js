@@ -47,7 +47,7 @@ export default function CategoryList() {
                   playlist && (
                     <NavLink
                       to="/activePlaylist"
-                      state = {{activePlaylist : playlist}}
+                      state = {{playlist : playlist}}
                       key={index}
                       className={style.albumBox}
                     >

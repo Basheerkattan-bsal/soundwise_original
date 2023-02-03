@@ -45,7 +45,7 @@ export default function NewRelease(props) {
               <div key={index} className={classes.albumBox}>
                 <NavLink
                   to="/album"
-                  state={{ album: album, albumId: album.id }}
+                  state={{ album: album}}
                   className={style.albumBox}
                 >
                   <div className={classes.albumImage}>
