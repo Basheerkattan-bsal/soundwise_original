@@ -21,10 +21,9 @@ const SearchResults = ({ activeCat, activeType }) => {
   return (
     <div>
       {activeType === "album,artist,playlist,track,show,episode,audiobook" ? <AllResults categories={categories}/> : ''}
-
       {activeType === 'playlist' && playlists ? <PlaylistResults playlists={playlists}/> : ''}
       {activeType === 'album' && albums ? <PlaylistResults playlists={albums} /> : '' }
-      {activeType === 'track' && tracks ? <TracksMap target={tracks?.items} picture={true} artists={true} album={true}/> : '' }
+      {activeType === 'track' && tracks ? <TracksMap target={tracks?.items} picture={true} artists={true} album={true} release={true}/> : '' }
       {activeType === 'artist' && artists ? <ArtistsResults artists={artists?.items} /> : '' }
        {/* {activeType === 'episode,show' ? <PlaylistResults playlists={episodes?.items} /> : '' } */}
 
