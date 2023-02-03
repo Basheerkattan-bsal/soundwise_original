@@ -17,16 +17,16 @@ export default function AllResults({ categories }) {
           <h2>Top Results</h2>
           <NavLink className={classes['top-artist']}
             to='/artist'
-            state={{artist: categories.artists.items[0]}}
+            state={{artist: categories?.artists?.items[0]}}
           >
             <div>
               <img
-                src={categories.artists?.items[0].images.at(-1).url}
+                src={categories.artists?.items[0]?.images?.at(-1)?.url}
                 alt="artist_image"
               />
 
-              <h3>{categories.artists?.items[0].name}</h3>
-              <span>{categories.artists?.items[0].type}</span>
+              <h3>{categories.artists?.items[0]?.name}</h3>
+              <span>{categories.artists?.items[0]?.type}</span>
             </div>
           </NavLink>
         </div>

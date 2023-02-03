@@ -8,7 +8,7 @@ import { faClock } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ArtistsMap from '../../routes/components/artistsMap/ArtistsMap.js';
 
-const TracksMap = ({target}) => {
+const TracksMap = ({target, picture, artists, album, release}) => {
   const [isActive, setIsActive] = useState(-1);
   console.log(target)
 
@@ -38,10 +38,10 @@ const TracksMap = ({target}) => {
             <div>#</div>
             <div>TITLE</div>
           </div>
-          {target.type === 'playlist' ? 
+          {album ? 
             <React.Fragment>
               <div className={classes['song-album']}>ALBUM</div>
-              <div className={classes['song-release']}>RELEASE DATE</div>
+              {release ? <div className={classes['song-release']}>RELEASE DATE</div> : '' }
             </React.Fragment>
             : ''
           }
@@ -65,7 +65,7 @@ const TracksMap = ({target}) => {
               <div className={classes.playlistInfo} key={index}>
                 <div className={classes.trackImg}>
                   <div>{index + 1}</div>
-                  {!target.type || target.type === 'playlist' ?
+                  {picture ?
                     <img
                       src={realTrack.album.images[2].url}
                       alt="album_image"
@@ -81,7 +81,7 @@ const TracksMap = ({target}) => {
                   >
                     {realTrack.name}
                   </NavLink>
-                  {target.type ? 
+                  {artists ? 
                     <div style={{display: 'flex', gap: '.3rem'}}>
                       <ArtistsMap artists={realTrack.artists} />
                     </div>
@@ -90,20 +90,23 @@ const TracksMap = ({target}) => {
                 </div>
               </div>
               {
-                target.type === 'playlist' ? 
+                album ?
                 <React.Fragment>
                   <div className={classes['album-info']}>
                     <NavLink
                       to='/album'
                       className={classes['album-name']}
-                      state={{album: track.track.album}}
+                      state={{album: realTrack.album}}
                     >
-                      {track.track.album.name}
+                      {realTrack.album.name}
                     </NavLink>
                   </div>
-                  <div className={classes['album-date']}>
-                    {track.track.album.release_date}
-                  </div>{' '}
+                  {release ? 
+                    <div className={classes['album-date']}>
+                      {realTrack.album.release_date}
+                    </div>
+                    : ''
+                  }
                 </React.Fragment>
                 : ''
               }

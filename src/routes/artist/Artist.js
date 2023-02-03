@@ -79,7 +79,7 @@ export default function Artist() {
           <Header target={artistInfo} />
           <div>
             {popularTrack &&
-              <TracksMap target={trackArr} />
+              <TracksMap target={trackArr} picture={true} artists={false} album={true} />
             }
             {popularTrack?.tracks.length > 5 && (
               <button

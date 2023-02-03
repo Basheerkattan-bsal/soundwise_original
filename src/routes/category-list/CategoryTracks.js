@@ -36,7 +36,7 @@ export default function CategoryTracks() {
 
           <Header target={playlistInfo} />
 
-          <TracksMap target={playlistInfo} />
+          <TracksMap target={playlistInfo} picture={true} artists={true} album={true} release={true} />
         </div>
       )}
       <Outlet />
