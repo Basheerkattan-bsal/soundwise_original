@@ -20,7 +20,8 @@ const SearchResults = ({ activeCat, activeType }) => {
 
   return (
     <div>
-      {activeType === "album,artist,playlist,track,show,episode,audiobook" ? (
+      {activeType === "album,artist,playlist,track,show,episode,audiobook" &&
+      activeCat ? (
         <AllResults categories={categories} />
       ) : (
         ""
@@ -42,6 +43,7 @@ const SearchResults = ({ activeCat, activeType }) => {
           artists={true}
           album={true}
           release={true}
+          info={true}
         />
       ) : (
         ""

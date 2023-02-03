@@ -2,11 +2,11 @@ import React from "react";
 import PlaylistResults from "./PlaylistResults";
 import general from "./GeneralStyle.module.css";
 import classes from "./AllResults.module.css";
-import msToTime from "../../../functions/timer";
 import ArtistsResults from "./ArtistsResults";
 import { NavLink } from "react-router-dom";
+import TracksMap from "../../../components/tracksMap/TracksMap";
 export default function AllResults({ categories }) {
-  const firstFourCategories = categories.tracks?.items.slice(0, 4);
+  console.log(categories);
 
   return (
     <div className={general.main}>
@@ -32,24 +32,17 @@ export default function AllResults({ categories }) {
 
         <div className={classes["artist-songs"]}>
           <h2>Songs</h2>
-          <div className={classes["songs-box"]}>
-            {firstFourCategories?.map((track, index) => {
-              return (
-                <div className={classes["song-info"]} key={index}>
-                  <img src={track.album.images[1].url} alt="track_image" />
-                  <div className={classes["song-title"]}>
-                    <div>{track.album.name}</div>
-                    <div className={classes["artist-name"]}>
-                      {track.album.artists[0].name}
-                    </div>
-                  </div>
-                  <div className={classes["track-duration"]}>
-                    {msToTime(track.duration_ms)[1]}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          {categories.tracks ? (
+            <TracksMap
+              target={categories?.tracks?.items?.slice(0, 4)}
+              picture={true}
+              artists={true}
+              album={true}
+              info={false}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div>
