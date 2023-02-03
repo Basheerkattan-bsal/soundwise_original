@@ -33,7 +33,7 @@ const PlaylistResults = ({ playlists }) => {
                     state={
                       playlist.type === 'playlist'
                         ? {
-                            activePlaylist: playlist,
+                            playlist: playlist,
                           }
                         : {
                             album: playlist,

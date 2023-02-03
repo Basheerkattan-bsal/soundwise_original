@@ -10,8 +10,9 @@ import ArtistsMap from '../../routes/components/artistsMap/ArtistsMap.js';
 
 const TracksMap = ({target}) => {
   const [isActive, setIsActive] = useState(-1);
+  console.log(target)
 
-  const realMap = target?.tracks ? target.tracks.items : target?.track ? target.track.items : target
+  const realMap = target.tracks ? target.tracks.items : target
 
   const ref = useRef(null);
   useEffect(() => {
@@ -37,12 +38,20 @@ const TracksMap = ({target}) => {
             <div>#</div>
             <div>TITLE</div>
           </div>
-
+          {target.type === 'playlist' ? 
+            <React.Fragment>
+              <div className={classes['song-album']}>ALBUM</div>
+              <div className={classes['song-release']}>RELEASE DATE</div>
+            </React.Fragment>
+            : ''
+          }
           <div className={classes['song-time']}>
             <FontAwesomeIcon icon={faClock} />
           </div>
         </div>
         {realMap?.map((track, index) => {
+          const realTrack = track.track ? track.track : track
+
           return (
             <div
               key={index}
@@ -61,21 +70,37 @@ const TracksMap = ({target}) => {
                   <NavLink
                     className={classes['track-nav']}
                     to="/single"
-                    state={{ singleTrack: track, album: target }}
+                    state={{ singleTrack: realTrack, album: target }}
                   >
-                    {track.name}
+                    {realTrack.name}
                   </NavLink>
                   <div style={{display: 'flex', gap: '.2rem'}}>
                     {' '}
-                    <ArtistsMap artists={track.artists} />
+                    <ArtistsMap artists={realTrack.artists} />
                     {' '}
                   </div>
                 </div>
               </div>
-              <div className={classes['album-date']}>
-              </div>{' '}
+              {
+                target.type === 'playlist' ? 
+                <React.Fragment>
+                  <div className={classes['album-info']}>
+                    <NavLink
+                      to='/album'
+                      className={classes['album-name']}
+                      state={{album: track.track.album}}
+                    >
+                      {track.track.album.name}
+                    </NavLink>
+                  </div>
+                  <div className={classes['album-date']}>
+                    {track.track.album.release_date}
+                  </div>{' '}
+                </React.Fragment>
+                : ''
+              }
               <div className={classes['track-duration']}>
-                {msToTime(track.duration_ms)[1]}
+                {msToTime(realTrack.duration_ms)[1]}
               </div>
             </div>
           );

@@ -10,16 +10,16 @@ function msToTime(ms) {
     h = h % 24;
     h += d * 24;
 
-    const duration = h + " h " + m + " min";
+    const duration = h + "h " + m + "min";
     if (s < 10) {
       s = "0" + s;
     }
     const trackTime = m + ":" + s;
     let albumDuration = "";
     if (h > 0) {
-      albumDuration = h + " h " + m + " min " + s + " sec";
+      albumDuration = h + "h " + m + "min " + s + "sec";
     } else {
-      albumDuration = m + " min " + s + " sec";
+      albumDuration = m + "min " + s + "sec";
     }
 
     return [duration, trackTime, albumDuration];
