@@ -81,11 +81,12 @@ const TracksMap = ({target}) => {
                   >
                     {realTrack.name}
                   </NavLink>
-                  <div style={{display: 'flex', gap: '.2rem'}}>
-                    {' '}
-                    {target.type ? <ArtistsMap artists={realTrack.artists} /> : ''}
-                    {' '}
-                  </div>
+                  {target.type ? 
+                    <div style={{display: 'flex', gap: '.3rem'}}>
+                      <ArtistsMap artists={realTrack.artists} />
+                    </div>
+                    : ''
+                  }
                 </div>
               </div>
               {

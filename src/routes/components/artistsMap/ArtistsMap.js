@@ -10,8 +10,10 @@ const ArtistsMap = ({artists, header}) => {
         artists.map((artist, index) => {
           return (
             <React.Fragment key={index}>
-              <p className={header ? classes.profileLink : classes['track-navName']}
->{index && header ? '-  ' : index ? ' - ' : ''}</p>
+              {index > 0 ? 
+                <p className={header ? classes.profileLink : classes['track-navName']}>{header ? '-  ' : ' - '}</p>
+                : ''
+              }
               <NavLink
                 className={header ? classes.profileLink : classes['track-navName']}
                 to="/artist"
