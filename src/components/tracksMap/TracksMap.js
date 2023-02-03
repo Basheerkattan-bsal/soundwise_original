@@ -65,6 +65,13 @@ const TracksMap = ({target}) => {
               <div className={classes.playlistInfo} key={index}>
                 <div className={classes.trackImg}>
                   <div>{index + 1}</div>
+                  {!target.type || target.type === 'playlist' ?
+                    <img
+                      src={realTrack.album.images[2].url}
+                      alt="album_image"
+                    />
+                    : ''
+                  }
                 </div>
                 <div className={classes.trackInfo}>
                   <NavLink
@@ -76,7 +83,7 @@ const TracksMap = ({target}) => {
                   </NavLink>
                   <div style={{display: 'flex', gap: '.2rem'}}>
                     {' '}
-                    <ArtistsMap artists={realTrack.artists} />
+                    {target.type ? <ArtistsMap artists={realTrack.artists} /> : ''}
                     {' '}
                   </div>
                 </div>
