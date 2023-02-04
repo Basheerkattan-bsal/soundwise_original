@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 
 import Lyrics from "./Lyrics.js";
@@ -15,8 +15,14 @@ import style from "./Single.module.css";
 import classes from "../category-list/CategoryTracks.module.css";
 
 import Bouncer from "../../functions/bouncer.js";
+import PlayerContext from "../../context/PlayerContext";
+import Songs from "../songs/Songs.js";
 
 export default function Single() {
+  //for the lyrics to pop up
+  const [player, playerDispatch] = useContext(PlayerContext);
+  const { isLyric, context } = player;
+
   const { state } = useLocation();
   const track = state.track;
 
@@ -70,7 +76,9 @@ export default function Single() {
     data();
   }, [state]);
 
-  return (
+  return isLyric ? (
+    <Songs songName={context.name} />
+  ) : (
     <div className={classes.main}>
       {track && colors && artistInfo && (
         <div>
@@ -80,7 +88,7 @@ export default function Single() {
           </div>
           <Header target={trackInfo.album} artistInfo={artistInfo} />
           <div className={style["song-container"]}>
-            <Lyrics colors={colors} songName={songName} />
+            <Lyrics songName={songName} />
 
             <div translate="no" className={style["artist_info"]}>
               <img

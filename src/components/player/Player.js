@@ -1,9 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
+
 import classes from "./Player.module.css";
 import PlayerContext from "../../context/PlayerContext";
 
 import { useToken } from "../../spotify";
 import getDetails from "../../functions/getDetails.js";
+import Dashboard from "./Dashboard";
+import Songs from "../../routes/songs/Songs";
 
 const Player = () => {
   const [player, playerDispatch] = useContext(PlayerContext);
@@ -15,9 +18,11 @@ const Player = () => {
 
   const searchParams = useToken();
 
-  console.log("trackInfo", trackInfo);
-  console.log("artistInfo", artistInfo);
-  console.log("popularTrack", popularTrack);
+  //console.log("context", context);
+
+  // console.log("trackInfo", trackInfo);
+  //console.log("artistInfo", artistInfo);
+  //console.log("popularTrack", popularTrack);
 
   /*   const songName = realTrack?.name;
    */ const artist = context?.artists[0];
@@ -56,25 +61,46 @@ const Player = () => {
     <div
       className={classes.player}
       translate="no"
-      style={{ color: "white", display: "flex" }}
+      style={{
+        color: "white",
+        display: "flex",
+        justifyContent: "space-between",
+      }}
     >
-      <div>
-        <img
-          src={artistInfo?.images[2].url}
-          alt="/artist_image"
-          style={{ width: "4rem", height: "4rem", margin: "0.7rem" }}
-        />
+      <div style={{ color: "white", display: "flex" }}>
+        <div>
+          <img
+            src={artistInfo?.images[2].url}
+            alt="/artist_image"
+            style={{ width: "4rem", height: "4rem", margin: "0.7rem" }}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignContent: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div>{trackInfo?.name} </div>
+          <div>{artistInfo?.name}</div>
+        </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignContent: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div>{trackInfo?.name} </div>
-        <div>{artistInfo?.name}</div>
+      {/*     <div>
+        <Dashboard trackUri={trackInfo?.uri} />
+      </div> */}
+      <div>
+        <button
+          onClick={state => {
+            playerDispatch({
+              type: "SET_IS_LYRIC",
+              isLyric: !state.isLyric,
+            });
+          }}
+        >
+          Lyrics
+        </button>
       </div>
     </div>
   );

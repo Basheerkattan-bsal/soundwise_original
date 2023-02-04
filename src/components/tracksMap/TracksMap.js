@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 import msToTime from "../../functions/timer.js";
@@ -9,9 +9,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ArtistsMap from "../../routes/components/artistsMap/ArtistsMap.js";
 
 import PlayerContext from "../../context/PlayerContext.js";
-import { useContext } from "react";
+import Songs from "../../routes/songs/Songs.js";
+
 const TracksMap = ({ target, picture, artists, album, release, info }) => {
   const [player, playerDispatch] = useContext(PlayerContext);
+  const { isLyric, context } = player;
 
   const [isActive, setIsActive] = useState(-1);
 
@@ -33,7 +35,9 @@ const TracksMap = ({ target, picture, artists, album, release, info }) => {
     };
   }, [isActive]);
 
-  return (
+  return isLyric ? (
+    <Songs songName={context.name} />
+  ) : (
     <div>
       <div className={classes.mainContainer}>
         {info ? (

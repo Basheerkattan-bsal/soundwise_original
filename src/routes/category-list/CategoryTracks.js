@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 import Bouncer from "../../functions/bouncer.js";

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import classes from "./Single.module.css";
 import parse from "html-react-parser";
 
-export default function Lyrics({ songName, singleTrack }) {
+export default function Lyrics({ songName }) {
   const [lyrics, setLyrics] = useState("");
   const navigate = useNavigate();
   //get the song lyrics
@@ -69,7 +69,7 @@ export default function Lyrics({ songName, singleTrack }) {
   return (
     <div className={classes["song-main"]}>
       <div className={classes["single_lyrics"]}>
-        <h3 translate="no">Lyrics</h3>
+        <h3 translate="no">{songName}</h3>
         <div id="google_translate_element"></div>
         {parse(lyrics)}
       </div>

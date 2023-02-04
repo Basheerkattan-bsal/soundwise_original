@@ -1,5 +1,9 @@
 import React from "react";
-
-export default function Songs() {
-  return <div translate="no">Songs</div>;
+import Lyrics from "../single/Lyrics";
+export default function Songs({ songName }) {
+  return (
+    <div>
+      <Lyrics songName={songName} />
+    </div>
+  );
 }
