@@ -67,40 +67,23 @@ const Player = () => {
         justifyContent: "space-between",
       }}
     >
-      <div style={{ color: "white", display: "flex" }}>
-        <div>
-          <img
-            src={artistInfo?.images[2].url}
-            alt="/artist_image"
-            style={{ width: "4rem", height: "4rem", margin: "0.7rem" }}
-          />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignContent: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div>{trackInfo?.name} </div>
-          <div>{artistInfo?.name}</div>
-        </div>
-      </div>
-      {/*     <div>
-        <Dashboard trackUri={trackInfo?.uri} />
-      </div> */}
       <div>
-        <button
-          onClick={state => {
-            playerDispatch({
-              type: "SET_IS_LYRIC",
-              isLyric: !state.isLyric,
-            });
-          }}
-        >
-          Lyrics
-        </button>
+        <img
+          src={trackInfo?.album?.images[2].url}
+          alt="/artist_image"
+          style={{ width: "4rem", height: "4rem", margin: "0.7rem" }}
+        />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignContent: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div>{trackInfo?.name} </div>
+        <div>{artistInfo?.name}</div>
       </div>
     </div>
   );
