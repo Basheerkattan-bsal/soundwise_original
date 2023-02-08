@@ -13,10 +13,12 @@ import {
 /* import logo1 from '../media/soundwise2.png' */
 import classes from "../../components/nav/Nav.module.css";
 import MainContext from "../../context/MainContext.js";
+import PlayerContext from "../../context/PlayerContext.js";
 import { useContext } from "react";
 
 export default function Nav() {
   const [STATE, DISPATCH] = useContext(MainContext);
+  const [player, playerDispatch] = useContext(PlayerContext);
 
   const [state, setState] = useState({ width: "15vw", height: "200" });
   return (
@@ -109,10 +111,6 @@ export default function Nav() {
             </NavLink>
           </div>
         </nav>
-        {/*        <div
-          id="google_translate_element"
-          style={{ margin: "1rem 0 0 1.5rem" }}
-        ></div> */}
       </div>
       <Outlet />
     </Resizable>

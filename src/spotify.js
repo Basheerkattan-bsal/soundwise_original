@@ -2,7 +2,6 @@ import { useContext } from "react";
 import MainContext from "./context/MainContext.js";
 import SpotifyWebApi from "spotify-web-api-js";
 
-
 // ===> user authentication
 const authEndpoint = "https://accounts.spotify.com/authorize";
 
@@ -10,6 +9,18 @@ const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 
 /* const  CLIENT_SECRET= process.env.ClientSecret*/
 const redirectUrl = "http://localhost:3000";
+
+//values for scope to work with player
+const scope = [
+  "user-read-email",
+  "user-read-private",
+  "user-modify-playback-state",
+  "user-read-playback-state",
+  "user-read-currently-playing",
+  "user-read-recently-played",
+  "user-read-playback-position",
+  "user-top-read",
+];
 
 export const GetTokenFromResponse = () => {
   return window.location.hash
@@ -25,13 +36,16 @@ export const GetTokenFromResponse = () => {
 };
 
 //===> login api
-export const loginUrl = `${authEndpoint}?client_id=${CLIENT_ID}&redirect_uri=${redirectUrl}&response_type=token`;
+export const loginUrl = `${authEndpoint}?client_id=${CLIENT_ID}&redirect_uri=${redirectUrl}&scope=${scope.join(
+  " "
+)}&response_type=token&show_dialog=true`;
 
 //fetchParams
 export function useToken() {
   const [STATE, DISPATCH] = useContext(MainContext);
   const { token } = STATE;
-
+  /*   console.log("before login token : ", token);
+   */
   return {
     method: "GET",
     accept: "application/json",
@@ -43,19 +57,3 @@ export function useToken() {
 }
 
 export const spotify = new SpotifyWebApi();
-
-//===> Use Token
-
-export const UseToken = () => {
-  const [STATE, DISPATCH] = useContext(MainContext);
-  const { token } = STATE;
-
-  return {
-    method: 'GET',
-    accept: 'application/json',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  };
-};

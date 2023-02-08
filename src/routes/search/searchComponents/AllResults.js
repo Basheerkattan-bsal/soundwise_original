@@ -10,12 +10,13 @@ export default function AllResults({ categories }) {
 
   return (
     <div className={general.main}>
-      <div className={classes['artist-container']}>
-        <div className={classes['artist-info']}>
+      <div className={classes["artist-container"]}>
+        <div className={classes["artist-info"]}>
           <h2>Top Results</h2>
-          <NavLink className={classes['top-artist']}
-            to='/artist'
-            state={{artist: categories?.artists?.items[0]}}
+          <NavLink
+            className={classes["top-artist"]}
+            to="/artist"
+            state={{ artist: categories?.artists?.items[0] }}
           >
             <div>
               <img
@@ -29,7 +30,7 @@ export default function AllResults({ categories }) {
           </NavLink>
         </div>
 
-        <div className={classes['artist-songs']}>
+        <div className={classes["artist-songs"]}>
           <h2>Songs</h2>
             {categories.tracks ? <TracksMap target={categories?.tracks?.items?.slice(0, 4)} picture={true} artists={true} album={true} info={false} /> : '' }
         </div>

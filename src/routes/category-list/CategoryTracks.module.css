@@ -20,6 +20,11 @@
   margin-top: 3rem;
   font-size: calc(3rem + 2vw);
 }
+.header h4 {
+  letter-spacing: 1;
+  margin-left: 1rem;
+  font-size: calc(.1rem + 1vw);
+}
 
 .header img {
   width: 15rem;
@@ -108,7 +113,6 @@
 
 .playlist-container:visited {
   color: white;
-
   border-radius: 2.5px;
 }
 

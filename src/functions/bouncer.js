@@ -6,9 +6,8 @@ const Bouncer = ({ dependencies }) => {
   const navigate = useNavigate();
   useEffect(() => {
     dependencies?.map(dep => {
-      console.log('dependency', dep)
       if (!dep) {
-        console.log('fuck me', dep)
+        console.log("fuck me", dep);
         navigate("/");
       }
     });

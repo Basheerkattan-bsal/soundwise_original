@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-
+import Login from "../../components/login/Login";
 import NewRelease from "../newRelease/NewRelease";
 import FeaturedPlaylists from "../featured-playlists/FeaturedPlaylists";
 import classes from "./Home.module.css";
@@ -35,6 +35,7 @@ export default function Home(props) {
 
   return (
     <div className={classes.main} translate="no">
+     <div className={classes['login-button']}> <Login /></div> 
       {token !== "" && <NewRelease token={token} />}
       {token !== "" && <FeaturedPlaylists token={token} />}
     </div>
