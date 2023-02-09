@@ -8,7 +8,6 @@ export const initialState = {
   user: null,
   login: false,
   catPlaylist: false,
-  profile: null,
   hashToken: null,
 };
 
@@ -32,7 +31,6 @@ export const mainReducer = (state, action) => {
         user: action.user,
       };
     }
-
     case "SET_PLAYLIST_TRACKS": {
       return {
         ...state,
@@ -51,34 +49,24 @@ export const mainReducer = (state, action) => {
         albums: action.albums,
       };
     }
-
     case "SET_FEATURED_PLAYLISTS": {
       return {
         ...state,
         featuredPlaylists: action.featuredPlaylists,
       };
     }
-
     case "SET_SEARCH": {
       return {
         ...state,
         search: action.search,
       };
     }
-
     case "SET_CAT_PLAYLIST": {
       return {
         ...state,
         catPlaylist: action.catPlaylist,
       };
     }
-    case "SET_PROFILE": {
-      return {
-        ...state,
-        profile: action.profile,
-      };
-    }
-
     default: {
       return state;
     }
