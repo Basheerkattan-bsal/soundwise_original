@@ -48,13 +48,13 @@ export default function PlayerButton() {
     const state = playerState ? "pause" : "play";
     deviceId &&
       (await axios.put(
-        `https://api.spotify.com/v1/me/player/${state}`,
+        `https://api.spotify.com/v1/me/player/${state}/volume?volume_percent=55&device_id=${deviceId}`,
         {
           "context_uri": uri,
           "offset": offset
         },
         {
-          "headers": JSON.stringify(headersParam),
+          "headers": headersParam,
         }
         
       ));
