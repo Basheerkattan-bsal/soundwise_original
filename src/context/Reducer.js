@@ -2,6 +2,7 @@ export const initialState = {
   token: "",
   featuredPlaylists: null,
   playListTracks: [],
+  playlist: null,
   newRelease: null,
   albums: [],
   search: null,
@@ -36,6 +37,12 @@ export const mainReducer = (state, action) => {
         ...state,
         playListTracks: action.playListTracks,
       };
+    }
+    case 'SET_PLAYLIST':{
+      return{
+        ...state,
+        playlist: action.playlist
+      }
     }
     case "SET_NEW_RELEASE": {
       return {

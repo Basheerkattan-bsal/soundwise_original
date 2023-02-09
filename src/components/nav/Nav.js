@@ -15,6 +15,7 @@ import classes from "../../components/nav/Nav.module.css";
 import MainContext from "../../context/MainContext.js";
 import PlayerContext from "../../context/PlayerContext.js";
 import { useContext } from "react";
+import UserPlayList from "../../routes/user_playList/UserPlayList";
 
 export default function Nav() {
   const [STATE, DISPATCH] = useContext(MainContext);
@@ -111,6 +112,7 @@ export default function Nav() {
             </NavLink>
           </div>
         </nav>
+              <UserPlayList />
       </div>
       <Outlet />
     </Resizable>

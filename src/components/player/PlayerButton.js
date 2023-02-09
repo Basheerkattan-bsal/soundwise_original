@@ -26,7 +26,6 @@ export default function PlayerButton() {
   /*   const [isPlaying, setPlaying] = useState(false);
    */ const { context, playerState } = player;
   const uri = context.uri;
-
   const headersParam = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + hashToken,
@@ -49,8 +48,9 @@ export default function PlayerButton() {
     deviceId &&
       (await axios.put(
         `https://api.spotify.com/v1/me/player/${state}/volume?volume_percent=55&device_id="${deviceId}"`,
-        {},
+        
         {
+          context_uri: uri,
           headers: headersParam,
         }
       ));
@@ -105,19 +105,20 @@ export default function PlayerButton() {
             type: "SET_PLAYER_STATE",
             playerState: !playerState,
           });
+          playSong()
         }}
       >
         {playerState ? (
           <FontAwesomeIcon
             className={classes["player-icon"]}
             icon={faPause}
-            onClick={playSong}
+          
           />
         ) : (
           <FontAwesomeIcon
             className={classes["player-icon"]}
             icon={faPlay}
-            onClick={playSong}
+            
           />
         )}
       </div>
