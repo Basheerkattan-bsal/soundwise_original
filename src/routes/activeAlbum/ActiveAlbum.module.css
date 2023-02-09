@@ -1,0 +1,168 @@
+.main {
+  width: 100%;
+  color: white;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 2rem;
+  color: white;
+  background-color: blue;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.header h2 {
+  letter-spacing: 1;
+  margin-left: 1rem;
+  margin-top: 3rem;
+  font-size: calc(3rem + 2vw);
+}
+
+.header img {
+  width: 15rem;
+  height: 15rem;
+}
+
+.headerInfo {
+  margin: 1.5rem;
+  letter-spacing: 2;
+}
+
+.headerInfo div {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.headerInfo div > span {
+  border-radius: 100%;
+  width: 0.2rem;
+  height: 0.2rem;
+  background-color: white;
+  border: 1px solid white;
+}
+
+.profileLink {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.profileLink:hover {
+  text-decoration: underline;
+}
+
+.mainContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-family: Helvetica, sans-serif;
+}
+
+.song-info,
+.playlist-container {
+  width: 95%;
+  padding: 0.5rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+}
+
+
+.song-info,.album-info,.album-date,.track-navName{
+    font-size: .8rem;
+    color: rgb(168, 162, 162);
+}
+
+.track-duration{
+    color: rgb(168, 162, 162);
+}
+
+.playlist-container:hover{
+    background-color: var( --color-backGround-hover);
+    border-radius: 2.5px;
+
+}
+
+.playlist-container:visited {
+  color: white;
+
+   
+    border-radius: 2.5px;
+    
+}
+
+.active{
+     border-radius: 2.5px;
+    background-color: #444444bb;
+
+}
+
+.active:hover {
+  background-color: #252424bb;
+}
+
+.playlist-container {
+  margin-bottom: 0.5rem;
+}
+
+.song-info {
+  margin: 2rem 0;
+  border-bottom: 1px solid gray;
+}
+.song-title,
+.playlistInfo,
+.trackImg {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+.trackImg img {
+  width: 3rem;
+  height: 3rem;
+}
+
+.trackInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+
+.track-nav,.track-navName{
+    text-decoration: none;
+}
+
+.track-nav{
+    color:white;
+}
+
+
+
+
+
+.song-release{
+    width: 21.5%;
+
+}
+
+.playlistInfo,
+.album-info,
+.song-title,
+.song-album {
+  width: 35%;
+}
+
+.album-date {
+  width: 20%;
+}

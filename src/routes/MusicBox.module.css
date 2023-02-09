@@ -2,6 +2,7 @@
     background-color: var(--color-backGround);
    margin: 3rem 0 3rem 1.5rem;
    
+    padding-bottom: 5rem
    
 }
 
@@ -14,7 +15,8 @@
 
 .albumContainer{
     display: flex;
-    justify-content: center;
+    justify-content: left;
+    gap: auto;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
@@ -29,10 +31,10 @@
     text-align: left;
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 1rem;
-    width: 11.5rem;
+    width: 12.5rem;
     transition: all .3s;
       text-decoration: none; 
-    
+    padding-bottom: 1rem
    
 }
 
@@ -48,8 +50,12 @@
 .albumName,
 .artistName{
     color: White;
-    padding: .5rem;
+    padding: .5rem 1rem;
     text-align: left;
+    width: 95%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .artistName {
@@ -67,4 +73,8 @@
    border-radius: 5px;
     width: 9rem;
     height: 9rem;
+}
+
+.artistImage img {
+  border-radius: 50%;
 }

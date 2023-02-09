@@ -1,0 +1,64 @@
+.player {
+  display: flex;
+  width: 100vw;
+  height: 5.7rem;
+  position: absolute;
+  bottom: 0;
+  color: white;
+  background-color: #222;
+}
+
+.player-container {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.track-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.8rem;
+  font-family: Helvetica, sans-serif;
+}
+
+.track-info {
+  display: flex;
+  margin-left: 1rem;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.track-description {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.track-name,
+.artist-name:hover {
+  color: white;
+}
+
+.artist-name,
+.lyrics {
+  color: rgb(168, 162, 162);
+}
+
+.track-name,
+.artist-name {
+  text-decoration: none;
+}
+.track-name:hover,
+.artist-name:hover {
+  text-decoration: underline;
+}
+
+.lyrics {
+  font-size: 1.2rem;
+  cursor: pointer;
+}

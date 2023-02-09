@@ -1,8 +1,14 @@
 .main {
   background-color: var(--color-backGround);
   position: relative;
+  padding-top: 7rem;
 }
-.main h3 {
+
+.mainScroll {
+  padding-top: 9rem
+}
+
+.main > h3 {
   color: white;
   font-size: 2rem;
   font-family: 'Roboto Condensed', sans-serif;
@@ -46,4 +52,12 @@
     color: white;
     margin: 1rem 1rem;
     font-family: 'Roboto Condensed', sans-serif
+}
+
+.searchBar {
+  position: fixed;
+  top: 0;
+  z-index: 50;
+  background-color: var(--color-backGround);
+  width: 100%;
 }

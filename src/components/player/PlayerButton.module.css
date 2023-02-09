@@ -1,0 +1,33 @@
+.player {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+}
+
+.play-button {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.player-icon {
+  color: black;
+}
+.forward-button,
+.backward-button,
+.shuffle-button,
+.repeat-button
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  color: rgb(168, 162, 162);
+  /* ===> should be white on active  */
+}

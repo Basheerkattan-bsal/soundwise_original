@@ -1,6 +1,5 @@
 export const initialState = {
   token: "",
-  
   featuredPlaylists: null,
   playListTracks: [],
   newRelease: null,
@@ -10,6 +9,7 @@ export const initialState = {
   login: false,
   catPlaylist: false,
   profile: null,
+  hashToken: null,
 };
 
 export const mainReducer = (state, action) => {
@@ -20,14 +20,19 @@ export const mainReducer = (state, action) => {
         token: action.token,
       };
     }
-
+    case "SET_HASH_TOKEN": {
+      return {
+        ...state,
+        hashToken: action.hashToken,
+      };
+    }
     case "SET_USER": {
       return {
         ...state,
         user: action.user,
       };
     }
-   
+
     case "SET_PLAYLIST_TRACKS": {
       return {
         ...state,
@@ -67,11 +72,11 @@ export const mainReducer = (state, action) => {
         catPlaylist: action.catPlaylist,
       };
     }
-    case 'SET_PROFILE':{
-      return{
+    case "SET_PROFILE": {
+      return {
         ...state,
-        profile: action.profile
-      }
+        profile: action.profile,
+      };
     }
 
     default: {

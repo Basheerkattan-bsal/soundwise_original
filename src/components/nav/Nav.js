@@ -13,14 +13,17 @@ import {
 /* import logo1 from '../media/soundwise2.png' */
 import classes from "../../components/nav/Nav.module.css";
 import MainContext from "../../context/MainContext.js";
+import PlayerContext from "../../context/PlayerContext.js";
 import { useContext } from "react";
 
 export default function Nav() {
   const [STATE, DISPATCH] = useContext(MainContext);
+  const [player, playerDispatch] = useContext(PlayerContext);
 
   const [state, setState] = useState({ width: "15vw", height: "200" });
   return (
     <Resizable
+      translate="yes"
       style={{ border: "1px solid black" }}
       minHeight="100vh"
       /* set minWidth to be wider */
@@ -34,7 +37,7 @@ export default function Nav() {
         });
       }}
     >
-      <div className={classes.main}>
+      <div className={classes.main} translate="no">
         <div className={classes.logo}>
           <img src={logo} alt="logo" /> {/* move the width to css file  */}
           <h2>Soundwise</h2>

@@ -10,15 +10,23 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.5",
     "color.js": "^1.2.0",
     "font-awesome": "^4.7.0",
+    "html-react-parser": "^3.0.8",
     "navigate": "^0.3.6",
     "re-resizable": "^6.9.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hot-toast": "^2.4.0",
     "react-router": "^6.6.2",
     "react-router-dom": "^6.6.1",
+<<<<<<< HEAD
     "react-scripts": "^5.0.0",
+=======
+    "react-scripts": "5.0.0",
+    "react-spotify-web-playback": "^0.11.3",
+>>>>>>> 0921194af345614d302525213392829e3233187c
     "spotify-web-api-js": "^1.5.2",
     "web-vitals": "^2.1.4"
   },

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import logo from '../../media/headphones-gradient.png'
+
 import { loginUrl } from '../../spotify';
 import classes from './Login.module.css'
 import MainContext from '../../context/MainContext';
@@ -13,8 +13,8 @@ function Login() {
 
   return (
     <div>
-    {login ?   <div className={classes.main}>
-      <img src= {logo} alt='soundwise logo'/>
+    {!login ?   <div className={classes.main}>
+      
       <a href={loginUrl}>LOGIN TO SPOTIFY</a>
       
       </div> : <div></div> }
