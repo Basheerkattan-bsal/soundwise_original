@@ -6,23 +6,27 @@ import classes from './Login.module.css';
 
 function Login() {
   const [STATE, DISPATCH] = useContext(MainContext);
-  const { login, hashToken } = STATE;
+  const { login, user, hashToken } = STATE;
+  console.log(user)
   const headerParams = {
     'Content-Type': 'application/json',
     Authorization: 'bearer' + hashToken,
-    
   };
   const getUser = async () => {
-    await fetch('http://spotify.com/v1/me', {
-      method: "GET",
-    headers: headerParams})
-    .then(res => res.json())
-    .then(res => DISPATCH({
-      type: 'SET_USER',
-      user : res
-    }));
+    await fetch('http://api.spotify.com/v1/me', {
+      method: 'GET',
+      headers: headerParams,
+      Host: 'api.spotify.com',
+    })
+      .then(res => res.json())
+      .then(res =>
+        DISPATCH({
+          type: 'SET_USER',
+          user: res,
+        })
+      );
   };
-  getUser()
+  getUser();
 
   return (
     <div>
@@ -31,7 +35,9 @@ function Login() {
           <a href={loginUrl}>LOGIN TO SPOTIFY</a>
         </div>
       ) : (
-        <div></div>
+        <div>
+          <button>{user?.displayName}</button>
+        </div>
       )}
     </div>
   );

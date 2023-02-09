@@ -19,8 +19,8 @@ import UserPlayList from "../../routes/user_playList/UserPlayList";
 
 export default function Nav() {
   const [STATE, DISPATCH] = useContext(MainContext);
-  const [player, playerDispatch] = useContext(PlayerContext);
-
+  /* const [player, playerDispatch] = useContext(PlayerContext); */
+  const {user, login} = STATE
   const [state, setState] = useState({ width: "15vw", height: "200" });
   return (
     <Resizable
