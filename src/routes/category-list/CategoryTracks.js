@@ -86,6 +86,19 @@ export default function CategoryTracks(props) {
     }
   }, []);
 
+  //using dispatch to get artist and single id
+
+  const getArtistSingleId = (artId, singId)=>{
+    dispatch({
+      type: "SET_ARTIST_ID",
+      artistId: artId,
+    })
+    dispatch({
+      type: "SET_SINGLE_ID",
+      singleId: singId,
+    })
+  }
+
   const listFocus = (e) => {
     console.log(e.target.classList)
     e.target.classList.toggle(classes.active)
@@ -155,8 +168,10 @@ export default function CategoryTracks(props) {
                         <NavLink>{track.track.name}</NavLink>
                         <div> {track.track.artists.map((artist, index) => {
                           return(
-                            <NavLink key= {index} to='/artist'>
-                              {artist.name}
+                            <NavLink key= {index} to='/artist' onClick ={()=>
+                            {
+                              getArtistSingleId(artId, singId)}}>
+                              {(index ? "," : "") + artist.name}
                             </NavLink>
                           )
                         })} </div>
