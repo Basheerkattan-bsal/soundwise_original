@@ -50,11 +50,11 @@ export default function PlayerButton() {
       (await axios.put(
         `https://api.spotify.com/v1/me/player/${state}`,
         {
-          context_uri: uri,
-          offset: offset
+          "context_uri": "uri",
+          "offset": "offset"
         },
         {
-          headers: headersParam,
+          "headers": JSON.stringify(headersParam),
         }
         
       ));
