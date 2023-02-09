@@ -54,7 +54,7 @@ export default function PlayerButton() {
           "offset": "offset"
         },
         {
-          "headers": JSON.stringify(headersParam),
+          "headers": headersParam,
         }
         
       ));
