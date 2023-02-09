@@ -14,6 +14,7 @@ const TracksMap = ({ target, picture, artists, album, release, info }) => {
   const [player, playerDispatch] = useContext(PlayerContext);
   const { seeLyrics, context } = player;
   const [isActive, setIsActive] = useState(-1);
+  console.log('target', target)
 
   const realMap = target.tracks
     ? target.tracks.items
@@ -79,6 +80,14 @@ const TracksMap = ({ target, picture, artists, album, release, info }) => {
                 setIsActive(index);
               }}
               onDoubleClick={e => {
+                playerDispatch({
+                  type: "SET_OFFSET",
+                  offset: index,
+                });
+                playerDispatch({
+                  type: "SET_CONTEXT_URI",
+                  contextUri: target.uri,
+                });
                 playerDispatch({
                   type: "SET_CONTEXT",
                   context: realTrack,

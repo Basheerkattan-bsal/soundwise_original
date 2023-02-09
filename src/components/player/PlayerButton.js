@@ -24,8 +24,9 @@ export default function PlayerButton() {
   const [{ hashToken }, DISPATCH] = useContext(MainContext);
   const [player, playerDispatch] = useContext(PlayerContext);
   /*   const [isPlaying, setPlaying] = useState(false);
-   */ const { context, playerState } = player;
-  const uri = context.uri;
+   */ const { context, offset, contextUri, playerState } = player;
+  const uri = contextUri;
+  console.log('uri', uri , offset)
   const headersParam = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + hashToken,
@@ -50,6 +51,7 @@ export default function PlayerButton() {
         `https://api.spotify.com/v1/me/player/${state}`,
         {
           context_uri: uri,
+          offset: offset
         },
         {
           headers: headersParam,

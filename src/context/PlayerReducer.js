@@ -2,7 +2,7 @@ export const initialState = {
   contextUri: false,
   contextUris: false,
   context: false,
-  offset: "",
+  offset: false,
   currentObject: false,
   seeLyrics: false,
   currentPlaying: null,
@@ -24,7 +24,7 @@ export const playerReducer = (state, action) => {
         contextUris: action.contextUris,
       };
     }
-    case "OFFSET": {
+    case "SET_OFFSET": {
       return {
         ...state,
         offset: action.offset,
