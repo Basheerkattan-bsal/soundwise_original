@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import {
   faPlay,
   faBackwardStep,
@@ -10,6 +9,7 @@ import {
   faPause,
 } from "@fortawesome/free-solid-svg-icons";
 
+import axios from "axios";
 //import SpotifyPlayer from "react-spotify-web-playback";
 
 import PlayerContext from "../../context/PlayerContext";
@@ -23,10 +23,8 @@ import ChangeState from "./player-functions/changeState";
 export default function PlayerButton() {
   const [{ hashToken }, DISPATCH] = useContext(MainContext);
   const [player, playerDispatch] = useContext(PlayerContext);
-  /*   const [isPlaying, setPlaying] = useState(false);
-   */ const { context, playerState } = player;
+  const { context, playerState } = player;
   const uri = context.uri;
-
   const headersParam = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + hashToken,
@@ -70,7 +68,10 @@ export default function PlayerButton() {
     deviceId &&
       (await axios.put(
         `https://api.spotify.com/v1/me/player/${state}/volume?volume_percent=55&device_id="${deviceId}"`,
-        {},
+
+        {
+          context_uri: uri,
+        },
         {
           headers: headersParam,
         }
@@ -125,17 +126,9 @@ export default function PlayerButton() {
       </div>
       <div className={classes["play-button"]}>
         {playerState ? (
-          <FontAwesomeIcon
-            className={classes["player-icon"]}
-            icon={faPause}
-            onClick={playSong}
-          />
+          <FontAwesomeIcon className={classes["player-icon"]} icon={faPause} />
         ) : (
-          <FontAwesomeIcon
-            className={classes["player-icon"]}
-            icon={faPlay}
-            onClick={playSong}
-          />
+          <FontAwesomeIcon className={classes["player-icon"]} icon={faPlay} />
         )}
       </div>
       <div className={classes["forward-button"]}>

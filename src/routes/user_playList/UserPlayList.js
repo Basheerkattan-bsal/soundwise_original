@@ -1,24 +1,27 @@
 import React, { useContext, useEffect } from "react";
 import { spotify } from "../../spotify";
-import { GetTokenFromResponse } from "../../spotify";
 import MainContext from "../../context/MainContext";
+
+import classes from "./UserPlayList.module.css";
+import { NavLink, Outlet } from "react-router-dom";
+import axios from "axios";
 
 export default function UserPlayList() {
   const [STATE, DISPATCH] = useContext(MainContext);
-  const { user } = STATE;
+  const { user, hashToken } = STATE;
 
+  console.log("This is the playlists", STATE.playlist);
+
+  const playlists = STATE.playlist?.items;
+
+  console.log(playlists);
   useEffect(() => {
     async function getData() {
-      const hash = GetTokenFromResponse();
-      window.location.hash = "";
-
-      let _token = hash.access_token;
-
-      if (_token) {
-        spotify.setAccessToken(_token);
+      if (hashToken) {
+        spotify.setAccessToken(hashToken);
         DISPATCH({
           type: "SET_TOKEN",
-          token: _token,
+          token: hashToken,
         });
 
         let playListId = "";
@@ -29,8 +32,8 @@ export default function UserPlayList() {
           playListId = response.items[0].id;
 
           DISPATCH({
-            type: "SET_PLAYLISTS",
-            playList: response,
+            type: "SET_PLAYLIST",
+            playlist: response,
           });
         });
 
@@ -47,5 +50,20 @@ export default function UserPlayList() {
     getData();
   }, []);
 
-  return <div>Play List...</div>;
+  return (
+    <div className={classes.main}>
+      {playlists?.map((playlist, index) => {
+        return (
+          <NavLink
+            to="/activePlaylist"
+            state={{ playlist: playlist }}
+            key={index}
+          >
+            {playlist.name}
+          </NavLink>
+        );
+      })}
+      <Outlet />
+    </div>
+  );
 }

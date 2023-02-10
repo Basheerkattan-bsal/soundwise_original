@@ -13,13 +13,16 @@ import {
 /* import logo1 from '../media/soundwise2.png' */
 import classes from "../../components/nav/Nav.module.css";
 import MainContext from "../../context/MainContext.js";
-import PlayerContext from "../../context/PlayerContext.js";
+import DisplayContext from "../../context/DisplayContext.js";
 import { useContext } from "react";
+import UserPlayList from "../../routes/user_playList/UserPlayList";
 
 export default function Nav() {
   const [STATE, DISPATCH] = useContext(MainContext);
-  const [player, playerDispatch] = useContext(PlayerContext);
 
+  const [{ navReminder }, dispatch] = useContext(DisplayContext);
+  /* const [player, playerDispatch] = useContext(PlayerContext); */
+  const { user, login, hashToken } = STATE;
   const [state, setState] = useState({ width: "15vw", height: "200" });
   return (
     <Resizable
@@ -76,41 +79,82 @@ export default function Nav() {
               Search
             </NavLink>
           </div>
-          <div>
+          <div
+            onClick={() => {
+              if (!hashToken) {
+                dispatch({
+                  type: "SET_NAV_REMINDER",
+                  navReminder: true,
+                });
+                dispatch({
+                  type: "SET_NAV_REMINDER_MSG",
+                  navReminderMsg: "library",
+                });
+              }
+            }}
+          >
             <NavLink
               className={({ isActive }) =>
                 isActive ? `${classes.active}` : `${classes.link}`
               }
-              to="library"
+              to={!user ? "/" : "library"}
             >
               <FontAwesomeIcon className={classes.awesome} icon={faBookOpen} />
               Library
             </NavLink>
           </div>
 
-          <div>
+          <div
+            onClick={() => {
+              if (!hashToken) {
+                dispatch({
+                  type: "SET_NAV_REMINDER",
+                  navReminder: true,
+                });
+                dispatch({
+                  type: "SET_NAV_REMINDER_MSG",
+                  navReminderMsg: "playlist",
+                });
+              }
+            }}
+          >
             <NavLink
               className={({ isActive }) =>
                 isActive ? `${classes.active}` : `${classes.link}`
               }
-              to="playlist"
+              to={!user ? "/" : "playlist"}
             >
               <FontAwesomeIcon className={classes.awesome} icon={faPlus} />
               Create Playlist
             </NavLink>
           </div>
-          <div>
+
+          <div
+            onClick={() => {
+              if (!hashToken) {
+                dispatch({
+                  type: "SET_NAV_REMINDER",
+                  navReminder: true,
+                });
+                dispatch({
+                  type: "SET_NAV_REMINDER_MSG",
+                  navReminderMsg: "love",
+                });
+              }
+            }}
+          >
             <NavLink
               className={({ isActive }) =>
                 isActive ? `${classes.active}` : `${classes.link}`
               }
-              to="songs"
+              to={!user ? "/" : "songs"}
             >
               <FontAwesomeIcon className={classes.awesome} icon={faHeart} />
               Liked Songs
             </NavLink>
           </div>
         </nav>
+        <UserPlayList />
       </div>
       <Outlet />
     </Resizable>

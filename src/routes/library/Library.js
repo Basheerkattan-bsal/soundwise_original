@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./Library.module.css";
 import style from "../MusicBox.module.css";
 import playlistImg from "../../media/headphones-gradient.png";
+import MainContext from "../../context/MainContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 export default function Library() {
+  const [STATE, DISPATCH] = useContext(MainContext);
+  const { user, hashToken, playlist } = STATE;
+
+  console.log("This is the playlists", playlist);
+
+  const playlists = STATE.playlist?.items;
   return (
     <div translate="no" className={classes.main}>
       <h1>Playlists</h1>

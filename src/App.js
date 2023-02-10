@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import { spotify } from "./spotify";
 import { GetTokenFromResponse } from "./spotify";
 import MainContext from "./context/MainContext.js";
+import PlayerContext from "./context/PlayerContext";
+
 import Nav from "./components/nav/Nav";
 import Home from "./routes/home/Home";
 import UserHome from "./routes/user_playList/UserPlayList";
@@ -20,11 +22,32 @@ import ActiveAlbum from "./routes/activeAlbum/ActiveAlbum";
 /* import Album from "./routes/albums/Album"; */
 import classes from "./App.module.css";
 import { useToken } from "./spotify.js";
+import axios from "axios";
 
 function App() {
-  const [{ token, user }, DISPATCH] = useContext(MainContext);
+  const [{ token, hashToken, user }, DISPATCH] = useContext(MainContext);
+  const [player, playerDispatch] = useContext(PlayerContext);
+
+  const { musicPlayer } = player;
 
   const searchParams = useToken();
+
+  useEffect(() => {
+    const getPlaybackState = async () => {
+      const { data } = await axios.get("https://api.spotify.com/v1/me/player", {
+        headers: {
+          Authorization: "Bearer " + hashToken,
+          "Content-Type": "application/json",
+        },
+      });
+      playerDispatch({
+        type: "SET_PLAYER_STATE",
+        playerState: data.is_playing,
+      });
+    };
+    getPlaybackState();
+  }, [playerDispatch, hashToken]);
+
   useEffect(() => {
     async function getData() {
       const hash = GetTokenFromResponse();
@@ -74,9 +97,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="search" element={<Search />} />
-          <Route path="library" element={<Library />} />
-          <Route path="playlist" element={<CreatePlaylist />} />
-          <Route path="songs" element={<Songs />} />
+          {user && <Route path="library" element={<Library />} />}
+          {user && <Route path="playlist" element={<CreatePlaylist />} />}
+          {user && <Route path="songs" element={<Songs />} />}
           <Route path="activePlaylist" element={<CategoryTracks />} />
           <Route path="album" element={<ActiveAlbum />} />
           <Route path="artist" element={<Artist />} />
@@ -85,8 +108,7 @@ function App() {
           {/*  <Route path="album" element={<Album />} />  */}
         </Routes>
       </div>
-      <Player />
-
+      {hashToken && <Player />}
       {user ? <UserHome /> : <div></div>}
     </div>
   );
