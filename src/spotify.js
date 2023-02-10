@@ -57,13 +57,3 @@ export function useToken() {
 }
 
 export const spotify = new SpotifyWebApi();
-<<<<<<< HEAD
-
-
-
-
-
-
- 
-=======
->>>>>>> 0921194af345614d302525213392829e3233187c

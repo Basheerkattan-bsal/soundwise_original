@@ -31,19 +31,6 @@ export default function CategoryTracks() {
       behavior: 'smooth'
     })
 
-  //using dispatch to get artist and single id
-
-  const getArtistSingleId = (artId, singId)=>{
-    dispatch({
-      type: "SET_ARTIST_ID",
-      artistId: artId,
-    })
-    dispatch({
-      type: "SET_SINGLE_ID",
-      singleId: singId,
-    })
-  }
-
     if (playlist) {
       getDetails(playlist.type, playlist.id, searchParams).then(res =>
         setPlaylistInfo(res)
