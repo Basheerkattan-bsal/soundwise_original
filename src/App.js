@@ -34,7 +34,6 @@ function App() {
   const [{ hashToken, user }, DISPATCH] = useContext(MainContext);
   const [{ isPlayer, trackPlayer }, playerDispatch] = useContext(PlayerContext);
 
-  console.log(songReminder);
   useEffect(() => {
     async function getData() {
       const hash = GetTokenFromResponse();

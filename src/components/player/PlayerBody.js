@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import PlayerContext from "../../context/PlayerContext";
 import MainContext from "../../context/MainContext";
-import classes from "./PlayerBody.module.css"; 
+import classes from "./PlayerBody.module.css";
 
 import msToTime from "../../functions/timer.js";
 import Player from "./Player";
@@ -182,10 +182,6 @@ export default function PlayerBody() {
                               context_uri,
                               track_number
                             );
-                            playerDispatch({
-                              type: "SET_TRACK_PLAYER",
-                              trackPlayer: false,
-                            });
                             setSongName(name);
                           }}
                         >

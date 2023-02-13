@@ -100,10 +100,6 @@ const TracksMap = ({ target, picture, artists, album, release, info }) => {
                     type: "SET_CONTEXT",
                     context: realTrack,
                   });
-                  playerDispatch({
-                    type: "SET_TRACK_PLAYER",
-                    trackPlayer: true,
-                  });
                   dispatch({
                     type: "SET_SONG_REMINDER",
                     songReminder: false,
