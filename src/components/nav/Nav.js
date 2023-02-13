@@ -11,6 +11,7 @@ import {
   faPlus,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
+
 import classes from "../../components/nav/Nav.module.css";
 import MainContext from "../../context/MainContext.js";
 import DisplayContext from "../../context/DisplayContext.js";
@@ -58,7 +59,7 @@ export default function Nav() {
           <div>
             <NavLink
               className={({ isActive }) =>
-                isActive ? `${classes.active}` : `${classes.link}`
+                !isActive ? `${classes.active}` : `${classes.link}`
               }
               //changing the status of categories to false to get back to main category page
               onClick={() => {
@@ -76,49 +77,47 @@ export default function Nav() {
               Search
             </NavLink>
           </div>
-          <div
-            onClick={() => {
-              if (!hashToken) {
-                dispatch({
-                  type: "SET_NAV_REMINDER",
-                  navReminder: true,
-                });
-                dispatch({
-                  type: "SET_NAV_REMINDER_MSG",
-                  navReminderMsg: "library",
-                });
-              }
-            }}
-          >
+          <div>
             <NavLink
               className={({ isActive }) =>
                 isActive ? `${classes.active}` : `${classes.link}`
               }
-              to={!user ? "/" : "library"}
+              onClick={() => {
+                if (!hashToken) {
+                  dispatch({
+                    type: "SET_NAV_REMINDER",
+                    navReminder: true,
+                  });
+                  dispatch({
+                    type: "SET_NAV_REMINDER_MSG",
+                    navReminderMsg: "library",
+                  });
+                }
+              }}
+              to={!hashToken ? "/" : "library"}
             >
               <FontAwesomeIcon className={classes.awesome} icon={faBookOpen} />
               Library
             </NavLink>
           </div>
 
-          <div
-            onClick={() => {
-              if (!hashToken) {
-                dispatch({
-                  type: "SET_NAV_REMINDER",
-                  navReminder: true,
-                });
-                dispatch({
-                  type: "SET_NAV_REMINDER_MSG",
-                  navReminderMsg: "playlist",
-                });
-              }
-            }}
-          >
+          <div>
             <NavLink
               className={({ isActive }) =>
                 isActive ? `${classes.active}` : `${classes.link}`
               }
+              onClick={() => {
+                if (!hashToken) {
+                  dispatch({
+                    type: "SET_NAV_REMINDER",
+                    navReminder: true,
+                  });
+                  dispatch({
+                    type: "SET_NAV_REMINDER_MSG",
+                    navReminderMsg: "playlist",
+                  });
+                }
+              }}
               to={!user ? "/" : "myPlaylist"}
             >
               <FontAwesomeIcon className={classes.awesome} icon={faPlus} />
@@ -126,24 +125,23 @@ export default function Nav() {
             </NavLink>
           </div>
 
-          <div
-            onClick={() => {
-              if (!hashToken) {
-                dispatch({
-                  type: "SET_NAV_REMINDER",
-                  navReminder: true,
-                });
-                dispatch({
-                  type: "SET_NAV_REMINDER_MSG",
-                  navReminderMsg: "love",
-                });
-              }
-            }}
-          >
+          <div>
             <NavLink
               className={({ isActive }) =>
                 isActive ? `${classes.active}` : `${classes.link}`
               }
+              onClick={() => {
+                if (!hashToken) {
+                  dispatch({
+                    type: "SET_NAV_REMINDER",
+                    navReminder: true,
+                  });
+                  dispatch({
+                    type: "SET_NAV_REMINDER_MSG",
+                    navReminderMsg: "love",
+                  });
+                }
+              }}
               to={!user ? "/" : "likedSong"}
             >
               <FontAwesomeIcon className={classes.awesome} icon={faHeart} />

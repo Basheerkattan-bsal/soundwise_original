@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,
@@ -10,14 +10,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import axios from "axios";
-//import SpotifyPlayer from "react-spotify-web-playback";
-
 import PlayerContext from "../../context/PlayerContext";
 import MainContext from "../../context/MainContext.js";
 import classes from "./PlayerButton.module.css";
-/* import ChangeTrack from "./player-functions/changeTrack";
-import ChangeState from "./player-functions/changeState";
- */
 
 export default function PlayerButton() {
   const [{ hashToken }, DISPATCH] = useContext(MainContext);
@@ -47,19 +42,9 @@ export default function PlayerButton() {
     }
   }, [playerDispatch, hashToken]);
 
-  //to play track - deviceId need to be provided
   const changeState = async () => {
     const state = playerState ? "pause" : "play";
     if (hashToken) {
-      /* const deviceRes = await axios.get(
-        "https://api.spotify.com/v1/me/player/devices ",
-        {
-          headers: headersParam,
-        }
-      );
-      const deviceId = deviceRes.data.devices[0].id; */
-      /* /volume?volume_percent=55&device_id="${deviceId}" 
-      deviceId &&*/
       await axios.put(
         `https://api.spotify.com/v1/me/player/${state}`,
 

@@ -7,7 +7,6 @@ import NavReminder from "../../components/reminder/NavReminder";
 import classes from "./Home.module.css";
 import MainContext from "../../context/MainContext";
 import DisplayContext from "../../context/DisplayContext.js";
-import SongReminder from "../../components/reminder/SongReminder";
 
 export default function Home(props) {
   const [{ songReminder, navReminder, navReminderMsg }, dispatch] =

@@ -13,8 +13,9 @@ import Songs from "../../routes/songs/Songs";
 
 export default function PlayerBody() {
   const [{ hashToken }, DISPATCH] = useContext(MainContext);
-  const [{ seeLyrics, context }, playerDispatch] = useContext(PlayerContext);
-  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [{ seeLyrics, selectedPlaylist }, playerDispatch] =
+    useContext(PlayerContext);
+  /* const [selectedPlaylist, setSelectedPlaylist] = useState(null); */
   const [isActive, setIsActive] = useState(-1);
   const [songName, setSongName] = useState("");
 
@@ -51,14 +52,15 @@ export default function PlayerBody() {
         track_number: track.track_number,
       })),
     };
-    setSelectedPlaylist(selectedPlaylist);
+    playerDispatch({ type: "SET_SELECTED_PLAYLISTS", selectedPlaylist });
+    /* setSelectedPlaylist(selectedPlaylist); */
   };
 
   useEffect(() => {
     if (selectedPlaylistId) {
       getInitialPlaylist();
     }
-  }, [hashToken, location]);
+  }, [hashToken, playerDispatch, selectedPlaylistId]);
 
   const playTrack = async (
     id,
@@ -111,7 +113,6 @@ export default function PlayerBody() {
     };
   }, [isActive]);
 
-  console.log(selectedPlaylist);
   return (
     hashToken && (
       <div className={classes.main} translate="no">

@@ -22,7 +22,7 @@
 
 .logo h2 {
   font-size: calc(0.75rem + 1.2vw);
-  font-family: 'Tourney', cursive;
+  font-family: "Tourney", cursive;
   margin-top: 2.5rem;
   color: transparent;
   background-image: linear-gradient(
@@ -49,13 +49,13 @@
 }
 
 .link {
-  font-family: 'Kanit', sans-serif;
+  font-family: "Kanit", sans-serif;
   text-decoration: none;
   color: var(--color-green);
   padding-left: 0.5rem;
 }
 .active {
-  font-family: 'Kanit', sans-serif;
+  font-family: "Kanit", sans-serif;
   color: white;
   padding-left: 0.5rem;
   text-decoration: none;
