@@ -2,13 +2,18 @@ import React, { useEffect, useContext } from "react";
 import Login from "../../components/login/Login";
 import NewRelease from "../newRelease/NewRelease";
 import FeaturedPlaylists from "../featured-playlists/FeaturedPlaylists";
+import NavReminder from "../../components/reminder/NavReminder";
+
 import classes from "./Home.module.css";
 import MainContext from "../../context/MainContext";
+import DisplayContext from "../../context/DisplayContext.js";
 
 export default function Home(props) {
-  /* const [token, setToken] = useState(''); */
+  const [{ songReminder, navReminder, navReminderMsg }, dispatch] =
+    useContext(DisplayContext);
+
   const [STATE, DISPATCH] = useContext(MainContext);
-  const { token } = STATE;
+  const { token, hashToken } = STATE;
   const SPOTIFY_CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
   const SPOTIFY_CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
   useEffect(() => {
@@ -35,7 +40,33 @@ export default function Home(props) {
 
   return (
     <div className={classes.main} translate="no">
-     <div className={classes['login-button']}> <Login /></div> 
+      <div className={classes["login-button"]}>
+        <Login />
+      </div>
+      {navReminder && navReminderMsg === "library" && (
+        <NavReminder
+          title={"Enjoy your Library"}
+          message={
+            "Log in to see saved songs, podcasts, artists and playlists in Your Library"
+          }
+        />
+      )}
+      {navReminder && navReminderMsg === "playlist" && (
+        <NavReminder
+          title={"Create a playlist"}
+          message={"Log in to create and share playlists"}
+        />
+      )}
+      {navReminder && navReminderMsg === "love" && (
+        <NavReminder
+          title={"Enjoy your Liked Song"}
+          message={
+            "Log in to see all the songs you've liked in one easy playlist"
+          }
+        />
+      )}
+      {/*       {songReminder && !hashToken && <SongReminder />}
+       */}{" "}
       {token !== "" && <NewRelease token={token} />}
       {token !== "" && <FeaturedPlaylists token={token} />}
     </div>

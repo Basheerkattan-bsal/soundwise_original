@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Tourney:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap');
- /* ===> This is for the description  font-family: 'Roboto Condensed', sans-serif; */
+@import url("https://fonts.googleapis.com/css2?family=Tourney:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap");
+/* ===> This is for the description  font-family: 'Roboto Condensed', sans-serif; */
 /* 
 
  */
-@import url('https://fonts.googleapis.com/css2?family=Volkhov:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Volkhov:wght@400;700&display=swap");
 /* font-family: 'Volkhov', serif; ===> This is the headline 
  */
 
@@ -14,18 +14,18 @@
   box-sizing: border-box;
 }
 
-#root{
+#root {
   height: 100vh;
   position: fixed;
-  top: 0;
+  top: -3rem;
   bottom: 0;
   left: 0;
   right: 0;
-  scrollbar-width: none; 
+  scrollbar-width: none;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 :root {

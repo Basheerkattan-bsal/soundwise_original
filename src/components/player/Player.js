@@ -1,44 +1,45 @@
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
 import classes from "./Player.module.css";
 import PlayerContext from "../../context/PlayerContext";
-import PlayTrack from "./player-functions/playTrack";
-
+import MainContext from "../../context/MainContext.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 /* import { useToken } from '../../spotify';
 import getDetails from '../../functions/getDetails.js';  */
-import PlayerTrackInfo from "./PlayerTrackInfo.js";
+import CurrentTrack from "./CurrentTrack";
+import Volume from "./Volume";
 import PlayerButton from "./PlayerButton";
-
+import Bouncer from "../../functions/bouncer.js";
 const Player = () => {
   const [player, playerDispatch] = useContext(PlayerContext);
-  /*   console.log(' coming from player.js', player);
-   */ /* const searchParams = useToken();  */
-  //console.log("context", context);
-  // console.log("trackInfo", trackInfo);
-  //console.log("artistInfo", artistInfo);
-  //console.log("popularTrack", popularTrack);
-  /*   const songName = realTrack?.name; */
+  const [{ hashToken }, DISPATCH] = useContext(MainContext);
 
   return (
-    <div className={classes.player}>
-      <div className={classes["player-container"]}>
-        <PlayerTrackInfo />
-        <PlayerButton />
-      
-        <FontAwesomeIcon
-          onClick={state => {
-            playerDispatch({
-              type: "SET_SEE_LYRICS",
-              seeLyrics: !state.seeLyrics,
-            });
-          }}
-          className={classes.lyrics}
-          icon={faBook}
-          title="Lyrics"
-        />
+    hashToken && (
+      <div className={classes.player}>
+        <Bouncer dependencies={["playlist"]} />
+        <div className={classes["player-container"]}>
+        
+          <CurrentTrack />
+          <PlayerButton />
+          <div className={classes['volume-lyrics']}>
+
+          <FontAwesomeIcon
+            onClick={state => {
+              playerDispatch({
+                type: "SET_SEE_LYRICS",
+                seeLyrics: !state.seeLyrics,
+              });
+            }}
+            className={classes.lyrics}
+            icon={faBook}
+            title="Lyrics"
+          />
+          <Volume />
+          </div>
+        </div>
       </div>
-    </div>
+    )
   );
 };
 export default Player;

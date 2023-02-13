@@ -2,7 +2,7 @@
   background-color: var(--color-backGround);
   display: flex;
   flex-direction: row;
-  
+  margin-top: 3rem;
 }
 
 .routes {
@@ -10,4 +10,12 @@
   width: 100%;
   overflow-y: scroll;
 }
-
+.songReminder_container {
+  height: 100vh;
+  width: 100vw;
+  margin-top: 3rem;
+  background-color: var(--color-backGround);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

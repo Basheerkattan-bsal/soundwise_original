@@ -11,11 +11,10 @@ import { useToken } from "../../spotify";
 
 export default function PlayerTrackInfo() {
   const [{ context }, playerDispatch] = useContext(PlayerContext);
+
   const [trackInfo, setTrackInfo] = useState(null);
   const [artistInfo, setArtistInfo] = useState(null);
   const searchParams = useToken();
-
-  console.log("context for playerTrackInfo", context);
   const artist = context ? context?.artists[0] : false;
   useEffect(() => {
     const data = async () => {
@@ -45,7 +44,11 @@ export default function PlayerTrackInfo() {
       <div className={classes["track-container"]}>
         <div className={classes["track-info"]}>
           <div className={classes["track-image"]}>
-            <img src={trackInfo?.album?.images[2].url} alt="/artist_image" />
+            <img
+              src={trackInfo?.album?.images[2].url}
+              alt="/artist_image"
+              style={{ width: "4rem", height: "4rem", margin: "0.7rem" }}
+            />
           </div>
         </div>
         <div className={classes["track-description"]}>

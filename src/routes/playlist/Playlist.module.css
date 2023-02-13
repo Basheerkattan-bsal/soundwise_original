@@ -1,0 +1,59 @@
+.main {
+  width: 100%;
+  color: var(--color-gold);
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 2rem;
+  color: var(--color-album-backGround);
+}
+
+.header h2 {
+  letter-spacing: 1;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  font-size: calc(5rem + 2vw);
+}
+
+.header .album_cover {
+  width: 12rem;
+  height: 12rem;
+  background-color: var(--color-album-backGround);
+}
+
+.banner_text h1,
+h4,
+h5 {
+  color: var(--color-album-backGround);
+  padding-left: 2rem;
+  line-height: 3rem;
+}
+.banner_text h1 {
+  font-size: calc(3rem + 2vw);
+}
+.mainContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-family: Helvetica, sans-serif;
+}
+.dotArea {
+  padding: 1rem 0 2rem;
+  height: 4rem;
+  border-bottom: 1px solid gray;
+  margin-bottom: 1rem;
+}
+.searchBar input {
+  width: 17rem;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  color: var(--color-album-backGround);
+}

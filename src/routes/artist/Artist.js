@@ -41,7 +41,7 @@ export default function Artist() {
     if (artistId) {
       getDetails(artist.type, artist.id, searchParams).then(res => {
         setArtistInfo(res);
-        console.log(res);
+        
       });
 
       getDetails(

@@ -1,0 +1,14 @@
+.main {
+  color: white;
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  font-family: Helvetica, sans-serif;
+  margin: 1rem 3rem;
+
+  gap: 1rem;
+}
+.navLink {
+  text-decoration: none;
+  color: var(--color-green);
+}

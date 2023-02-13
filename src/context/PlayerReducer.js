@@ -1,10 +1,12 @@
 export const initialState = {
-  context: false,
-  currentObject: false,
+  context: null,
+  trackPlayer: false,
   seeLyrics: false,
+  playlists: [],
+  selectedPlaylist: null,
+  selectedPlaylistId: "6ktXKmv6PQlkKTgM7TZKHO",
   currentPlaying: null,
   playerState: false,
-  playingTrack: null,
 };
 
 export const playerReducer = (state, action) => {
@@ -13,6 +15,12 @@ export const playerReducer = (state, action) => {
       return {
         ...state,
         context: action.context,
+      };
+    }
+    case "SET_TRACK_PLAYER": {
+      return {
+        ...state,
+        trackPlayer: action.trackPlayer,
       };
     }
     case "SET_SEE_LYRICS": {
@@ -28,10 +36,22 @@ export const playerReducer = (state, action) => {
         currentPlaying: action.currentPlaying,
       };
     }
-    case "SET_CURRENT_PLAYING": {
+    case "SET_PLAYLISTS": {
       return {
         ...state,
-        currentTrack: action.currentTrack,
+        playlists: action.playlists,
+      };
+    }
+    case "SET_SELECTED_PLAYLISTS": {
+      return {
+        ...state,
+        selectedPlaylist: action.selectedPlaylist,
+      };
+    }
+    case "SET_PLAYLISTS_ID": {
+      return {
+        ...state,
+        selectedPlaylistId: action.selectedPlaylistId,
       };
     }
     case "SET_PLAYER_STATE": {
@@ -40,6 +60,7 @@ export const playerReducer = (state, action) => {
         playerState: action.playerState,
       };
     }
+
     default: {
       return state;
     }

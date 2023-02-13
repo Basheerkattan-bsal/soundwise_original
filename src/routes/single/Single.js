@@ -20,8 +20,7 @@ import Songs from "../songs/Songs.js";
 
 export default function Single() {
   //for the lyrics to pop up
-  const [player, playerDispatch] = useContext(PlayerContext);
-  const { seeLyrics, context } = player;
+  const [{ seeLyrics, context }, playerDispatch] = useContext(PlayerContext);
 
   const { state } = useLocation();
   const { track } = state;
@@ -85,16 +84,20 @@ export default function Single() {
           <div translate="no" className={classes.headerNav}>
             The SINGLE page
           </div>
-
-
-          <Header target={albumInfo} artistInfo={artistInfo} songInfo={realTrack} />
-          <TracksMap target={[track]} artists={true} info={true} release={true} album={albumInfo}/>
-
-          <div className={style['song-container']}>
-
-         
+          <Header
+            target={albumInfo}
+            artistInfo={artistInfo}
+            songInfo={realTrack}
+          />
+          <TracksMap
+            target={[track]}
+            artists={true}
+            info={true}
+            release={true}
+            album={albumInfo}
+          />
+          <div className={style["song-container"]}>
             <Lyrics colors={colors} songName={realTrack.name} />
-
             <div translate="no" className={style["artist_info"]}>
               <img
                 src={artistInfo.images[1].url}

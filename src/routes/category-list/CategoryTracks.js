@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-
 import Bouncer from "../../functions/bouncer.js";
 import Header from "../components/header/Header.js";
 import TracksMap from "../../components/tracksMap/TracksMap.js";
@@ -60,6 +59,7 @@ export default function CategoryTracks() {
         </div>
       )}
       <Outlet />
+      
     </div>
   );
 }

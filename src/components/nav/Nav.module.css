@@ -16,12 +16,11 @@
 
 .logo img {
   margin: 1.5rem 0 0 1.5rem;
-  /* resize the logo */
+
   width: calc(40px + 1.2vw);
 }
 
 .logo h2 {
-  /* resize the logo text */
   font-size: calc(0.75rem + 1.2vw);
   font-family: "Tourney", cursive;
   margin-top: 2.5rem;

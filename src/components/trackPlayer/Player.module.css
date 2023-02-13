@@ -1,26 +1,22 @@
 .player {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  width: 100vw;
   height: 5.7rem;
   position: absolute;
-  bottom: -3rem;
+  bottom: 0;
   color: white;
   background-color: #222;
 }
 
 .player-container {
-  width: 98%;
+  width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
- 
 }
 
 .track-container {
-  font-family:  Helvetica, sans-serif;
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -35,7 +31,6 @@
   align-items: center;
   flex-direction: row;
   gap: 0.5rem;
-
 }
 
 .track-description {
@@ -66,27 +61,4 @@
 .lyrics {
   font-size: 1.2rem;
   cursor: pointer;
-}
-
-
-/* ===> volume button */
-
-.volume-button{
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.volume-button input{
-  width: 7rem;
-  border-radius: 2rem;
-  height: .3rem;
-  color: maroon;
-}
-
-.volume-lyrics{
-
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem
 }

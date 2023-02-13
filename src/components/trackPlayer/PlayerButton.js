@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 import {
   faPlay,
   faBackwardStep,
@@ -9,51 +10,69 @@ import {
   faPause,
 } from "@fortawesome/free-solid-svg-icons";
 
-import axios from "axios";
+//import SpotifyPlayer from "react-spotify-web-playback";
+
 import PlayerContext from "../../context/PlayerContext";
 import MainContext from "../../context/MainContext.js";
+
 import classes from "./PlayerButton.module.css";
+/* import ChangeTrack from "./player-functions/changeTrack";
+import ChangeState from "./player-functions/changeState";
+ */
 
 export default function PlayerButton() {
   const [{ hashToken }, DISPATCH] = useContext(MainContext);
-  const [{ playerState }, playerDispatch] = useContext(PlayerContext);
+  const [player, playerDispatch] = useContext(PlayerContext);
+  const [playerState, setPlayerState] = useState(true);
+
   const headersParam = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + hashToken,
   };
 
-  //get play - pause state
   useEffect(() => {
-    if (hashToken) {
-      const getPlaybackState = async () => {
-        const { data } = await axios.get(
-          "https://api.spotify.com/v1/me/player",
-          {
-            headers: headersParam,
-          }
-        );
-        playerDispatch({
-          type: "SET_PLAYER_STATE",
-          playerState: data.is_playing,
-        });
-      };
-
-      getPlaybackState();
-    }
-  }, [playerDispatch, hashToken]);
-
-  const changeState = async () => {
-    const state = playerState ? "pause" : "play";
-    if (hashToken) {
-      await axios.put(
-        `https://api.spotify.com/v1/me/player/${state}`,
-
-        {},
+    const getCurrentTrack = async () => {
+      const response = await axios.get(
+        "https://api.spotify.com/v1/me/player/currently-playing",
         {
           headers: headersParam,
         }
       );
-    }
+      if (response.data !== "") {
+        const currentPlaying = {
+          id: response.data.item.id,
+          name: response.data.item.name,
+          artists: response.data.item.artists.map(artist => artist.name),
+          image: response.data.item.album.images[2].url,
+        };
+        playerDispatch({ type: "SET_PLAYING", currentPlaying });
+      } else {
+        playerDispatch({ type: "SET_PLAYING", currentPlaying: null });
+      }
+    };
+    getCurrentTrack();
+  }, [hashToken, playerDispatch]);
+
+  const playSong = async () => {
+    //get device info. to play songs
+    const deviceRes = await axios.get(
+      "https://api.spotify.com/v1/me/player/devices ",
+      {
+        headers: headersParam,
+      }
+    );
+    const deviceId = deviceRes.data.devices[0].id;
+    console.log(deviceId);
+
+    const state = playerState ? "pause" : "play";
+    deviceId &&
+      (await axios.put(
+        `https://api.spotify.com/v1/me/player/${state}/volume?volume_percent=55&device_id="${deviceId}"`,
+        {},
+        {
+          headers: headersParam,
+        }
+      ));
     playerDispatch({
       type: "SET_PLAYER_STATE",
       playerState: !playerState,
@@ -102,18 +121,21 @@ export default function PlayerButton() {
           onClick={() => changeTrack("previous")}
         />
       </div>
-      <div className={classes["play-button"]}>
+      <div
+        className={classes["play-button"]}
+        onClick={() => setPlayerState(!playerState)}
+      >
         {playerState ? (
           <FontAwesomeIcon
             className={classes["player-icon"]}
             icon={faPause}
-            onClick={changeState}
+            onClick={playSong}
           />
         ) : (
           <FontAwesomeIcon
             className={classes["player-icon"]}
             icon={faPlay}
-            onClick={changeState}
+            onClick={playSong}
           />
         )}
       </div>
