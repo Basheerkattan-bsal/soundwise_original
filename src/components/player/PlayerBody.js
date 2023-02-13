@@ -9,7 +9,7 @@ import MainContext from "../../context/MainContext";
 import classes from "./PlayerBody.module.css";
 
 import msToTime from "../../functions/timer.js";
-import Player from "./Player";
+ import Player from "./Player"; 
 import Songs from "../../routes/songs/Songs";
 
 export default function PlayerBody() {
@@ -209,7 +209,7 @@ export default function PlayerBody() {
                 </div>
               </div>
             )}
-            <Player />
+             <Player /> 
           </div>
         )}
       </div>

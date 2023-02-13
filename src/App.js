@@ -10,7 +10,7 @@ import SongReminder from "./components/reminder/SongReminder";
 import Nav from "./components/nav/Nav";
 import MyPlayer from "./components/player/PlayerBody";
 import Player from "./components/player/Player";
-import TrackPlayer from "./components/trackPlayer/Player";
+
 
 import Home from "./routes/home/Home";
 import Search from "./routes/search/Search";
