@@ -18,11 +18,7 @@
   height: 15rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
-.main {
-  width: 100%;
-  color: white;
-  margin-top: 3rem;
-}
+
 
 .header {
   width: 100%;
@@ -47,7 +43,7 @@
   margin-top: 2.5rem;
 }
 
-.header album_cover {
+.playlist img {
   width: 15rem;
   height: 15rem;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext} from "react";
 import classes from "./Player.module.css";
 import PlayerContext from "../../context/PlayerContext";
 import MainContext from "../../context/MainContext.js";
@@ -19,8 +19,11 @@ const Player = () => {
       <div className={classes.player}>
         <Bouncer dependencies={["playlist"]} />
         <div className={classes["player-container"]}>
+        
           <CurrentTrack />
           <PlayerButton />
+          <div className={classes['volume-lyrics']}>
+
           <FontAwesomeIcon
             onClick={state => {
               playerDispatch({
@@ -33,6 +36,7 @@ const Player = () => {
             title="Lyrics"
           />
           <Volume />
+          </div>
         </div>
       </div>
     )

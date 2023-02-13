@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import PlayerContext from "../../context/PlayerContext";
 import MainContext from "../../context/MainContext";
-import classes from "./PlayerBody.module.css";
+import classes from "./PlayerBody.module.css"; 
+
 import msToTime from "../../functions/timer.js";
 import Player from "./Player";
 import Songs from "../../routes/songs/Songs";

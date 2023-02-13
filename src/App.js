@@ -102,7 +102,7 @@ function App() {
             </Routes>
           </div>
           {isPlayer && hashToken && <PlayerBody />}
-          {hashToken && trackPlayer && <TrackPlayer />}
+          {hashToken && trackPlayer && <Player />}
         </div>
       ) : (
         <div className={classes["songReminder_container"]}>

@@ -3,6 +3,11 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import DisplayContext from "../../context/DisplayContext.js";
 import MainContext from "../../context/MainContext";
 import style from "../MusicBox.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPlay,
+  faPause,
+} from "@fortawesome/free-solid-svg-icons";
 //import Bouncer from "../../functions/bouncer.js";
 
 export default function NewRelease(props) {

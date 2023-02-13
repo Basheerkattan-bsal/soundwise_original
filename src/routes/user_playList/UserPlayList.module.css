@@ -1,15 +1,14 @@
 .main {
   color: white;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   flex-direction: column;
-  align-items: center;
   font-family: Helvetica, sans-serif;
-  margin-top: 1rem;
-  margin-left: -2%;
+  margin: 1rem 3rem;
+
   gap: 1rem;
 }
-.navlink {
+.navLink {
   text-decoration: none;
   color: var(--color-green);
 }

@@ -5,6 +5,8 @@
   color: white;
   display: flex;
   top: -5rem;
+  transition: all .2s;
+  animation: moveInBottom .5s ease-out;
 }
 .main h1 {
   color: white;
@@ -60,9 +62,32 @@ h5 {
   background-color: var(--color-album-backGround);
   color: white;
   border-radius: 15px;
+  border: none;
   padding: 8px 20px;
   text-align: center;
   width: 10rem;
   height: 2rem;
   margin: auto;
+  transition: all .2s;
 }
+
+.reminderBox button:hover,
+.reminderBox a:hover{
+  background-color: white;
+  color: black;
+  transform: scaleX(1.2) scaleY(1.2);
+}
+
+
+@keyframes moveInBottom {
+  0% {
+      opacity: 0;
+      transform: translateY(3rem);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translate(0);
+  }
+}
+

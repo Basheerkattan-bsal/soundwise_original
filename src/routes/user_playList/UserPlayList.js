@@ -21,8 +21,8 @@ export default function UserPlayList() {
       }
     );
     const { items } = response.data;
-    const playlists = items.map(({ name, id }) => {
-      return { name, id };
+    const playlists = items.map((playlist, id) => {
+      return  playlist ;
     });
     playerDispatch({
       type: "SET_PLAYLISTS",
@@ -39,15 +39,15 @@ export default function UserPlayList() {
   return (
     hashToken && (
       <div className={classes.main}>
-        {playlists?.map(({ name, id }) => {
+        {playlists?.map((playlist, id) => {
           return (
             <NavLink
               key={id}
-              to="/myPlayer"
-              state={{ id: id }}
-              className={classes.navlink}
+              to="/activePlaylist"
+              state={{ playlist: playlist}}
+              className={classes.navLink}
             >
-              {name}
+              {playlist.name}
             </NavLink>
           );
         })}

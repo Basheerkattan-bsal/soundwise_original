@@ -47,7 +47,7 @@ export default function PlayerTrackInfo() {
             <img
               src={trackInfo?.album?.images[2].url}
               alt="/artist_image"
-              style={{ width: "4rem", height: "4rem", margin: "0.7rem" }}
+            /*   style={{ width: "4rem", height: "4rem", margin: "0.7rem" }} */
             />
           </div>
         </div>
